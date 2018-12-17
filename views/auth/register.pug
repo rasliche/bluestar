@@ -2,14 +2,36 @@ extends ../layouts/main-layout
 
 block content
     h1 #{pageTitle}
-    div#register-form
-        form(action="/auth/login", method="post")
-            div
+    div#register-form.text-center
+        form
+            div.py-2
                 label(for="email") Email 
-                input(type="text", name="email", id="email", placeholder="john.doe@gmail.com")
-            div
+                input(
+                    type="text", 
+                    name="email", 
+                    id="email",
+                    v-model="userData.email",
+                    placeholder="john.doe@gmail.com",
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
                 label(for="password") Password 
-                input(type="password", name="password", id="password")
-            button(type="submit") Login
+                input(
+                    type="password", 
+                    name="password", 
+                    id="password",
+                    v-model="userData.password",
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
+                label(for="password-match") Repeat Password 
+                input(
+                    type="password", 
+                    name="passwordMatch", 
+                    id="passwordMatch",
+                    v-model="userData.passwordMatch",
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            button#submit(
+                @click.prevent="submit",
+                class="{formSubmitted: disabled}",
+                class="border-2 p-1 rounded border-blue") Register
 
     script(src="../../js/register-form.js")
