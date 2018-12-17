@@ -1,0 +1,10 @@
+extends ../layouts/main-layout.pug
+
+block content
+    h1 #{pageTitle} Modules
+    ul
+        each course in curriculum
+            li
+                a(href="/training/"+course.slug)= course.title
+        else
+            li Come back soon for the list of courses!

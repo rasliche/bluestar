@@ -1,0 +1,17 @@
+extends ../layouts/main-layout.pug
+
+block content
+    h1 Get Trained
+    div.border.border-blue.flex
+        div.border.border-blue-light(class="w-1/2").text-center
+            img(src="https://sanctuaries.noaa.gov/bluestar/bluestar-logo.jpg")
+            //- This link should take you to the first incomplete module
+            a(href="/training/about-blue-star").px-4 Diving
+            //- This link will take you to a page with all diving modules
+            a(href="/training/diving").px-4 Curriculum
+
+        div.border.border-blue-light(class="w-1/2").text-center
+            img(src="https://sanctuaries.noaa.gov/media/img/bluestar-fishing-logo.jpg")
+            a(href="/training/about-blue-star").px-4 Fishing
+            //- This link will take you to a page with all fishing modules
+            a(href="/training/fishing").px-4 Curriculum

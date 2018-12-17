@@ -1,0 +1,11 @@
+extends ../layouts/main-layout.pug
+
+block content
+    form(action="/admin/add-shop", method="post").w-full.border
+        div.border.border-red
+            label(for="name") Name
+            input(type="text", id="title", name="name").border
+        div
+            label(for="password") Password
+            input(type="text", id="password", name="password").border
+        button(type="submit") Add
