@@ -1,6 +1,7 @@
 const config = require('config')
 const morgan = require('morgan')
 const helmet = require('helmet')
+const express = require('express')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 
@@ -13,6 +14,7 @@ const store = new MongoDBStore({
 
 module.exports = function(app) {
     app.use(helmet())
+    app.use(express.urlencoded({ extended: true }))
     app.use(session({
         secret: config.get('session-secret'),
         resave: false,
