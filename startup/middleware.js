@@ -5,6 +5,8 @@ const express = require('express')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 
+const { User } = require('../models/user')
+
 const MONGODB_URI = config.get('db')
 
 const store = new MongoDBStore({
@@ -21,6 +23,14 @@ module.exports = function(app) {
         saveUninitialized: false,
         store: store
     }))
+    
+    app.use((req, res, next) => {
+        if (!req.session.user) return next()
+        // Find the current logged in user
+        User.findById(req.session.user._id)
+        console.log("Looking up the logged in user...")
+        next()
+    })
     
     if (app.get('env') === 'development') {
         console.log(`app: ${app.get('env')}`)
