@@ -11,3 +11,5 @@ nav.flex
         a(href="/login").mr-4 Login
     else
         a(href="/me").mr-4 Me
+        form(action="/logout", method="post")
+            button(type="submit") Logout
