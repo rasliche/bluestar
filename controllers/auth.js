@@ -5,7 +5,7 @@ exports.getRegister = (req, res, next) => {
 }
 
 exports.postRegister = (req, res, next) => {
-    console.log("POST /auth/register")
+
 }
 
 exports.getLogin = (req, res, next) => {
@@ -15,6 +15,7 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.postLogin = (req, res, next) => {
-    console.log("POST /auth/login")
+    res.setHeader('Set-Cookie', 'loggedIn=true; Secure; HTTP;')
+    res.redirect('/')
 }
 
