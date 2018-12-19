@@ -24,5 +24,10 @@ module.exports = function(app) {
         console.log(`app: ${app.get('env')}`)
         app.use(morgan('dev'))
         console.log('Morgan enabled...')
+
+        app.use((req, res, next) => {
+            console.log(req.session)
+            next()
+        })
     }
 }
