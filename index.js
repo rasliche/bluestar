@@ -1,11 +1,6 @@
 const config = require('config')
 const express = require('express')
-const mongoose = require('mongoose')
-const helmet = require('helmet')
-const morgan = require('morgan')
-
 const app = express()
-app.use(helmet())
 
 // configuration
 app.set('view engine', 'pug')
@@ -14,13 +9,15 @@ app.use(express.static('public'))
 
 console.log('Application Name: ' + config.get('name'))
 
-if (app.get('env') === 'development') {
-    console.log(`app: ${app.get('env')}`)
-    app.use(morgan('dev'))
-    console.log('Morgan enabled...')
-}
+// app.use((req, res, next) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*')
+//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+//     next()
+// })
 
 // startup
+require('./startup/middleware')(app)
 require('./startup/routes')(app)
 require('./startup/db')()
 
