@@ -23,7 +23,7 @@ module.exports = function(app) {
         saveUninitialized: false,
         store: store
     }))
-    
+
     app.use((req, res, next) => {
         if (!req.session.user) return next()
         // Find the current logged in user
