@@ -1,6 +1,7 @@
 exports.getRegister = (req, res, next) => {
     res.render('auth/register', {
-        pageTitle: "Register"
+        pageTitle: "Register",
+        loggedIn: req.session.loggedIn
     })
 }
 
@@ -10,12 +11,13 @@ exports.postRegister = (req, res, next) => {
 
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
-        pageTitle: "Login"
+        pageTitle: "Login",
+        loggedIn: req.session.loggedIn
     })
 }
 
 exports.postLogin = (req, res, next) => {
-    res.setHeader('Set-Cookie', 'loggedIn=true; Secure; HTTP;')
+    req.session.loggedIn = true
     res.redirect('/')
 }
 
