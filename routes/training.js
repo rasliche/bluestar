@@ -8,9 +8,7 @@ const trainingController = require('../controllers/training')
 router.get('/', (req, res, next) => {
     res.render('training/index', {
         pageTitle: "Training",
-        user: {
-            isLoggedIn: true
-        }
+        loggedIn: req.session.loggedIn
     })
 })
 
