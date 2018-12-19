@@ -6,7 +6,12 @@ const trainingController = require('../controllers/training')
 
 // GET /training
 router.get('/', (req, res, next) => {
-    res.render('training/index', {pageTitle: "Training"})
+    res.render('training/index', {
+        pageTitle: "Training",
+        user: {
+            isLoggedIn: true
+        }
+    })
 })
 
 // GET /training/me
