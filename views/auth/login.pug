@@ -2,14 +2,21 @@ extends ../layouts/main-layout.pug
 
 block content
     h1 #{ pageTitle }
-    div#login
-        form(action="/auth/login", method="post")
-            div
+    div#login-form.text-center
+        form(action="/login", method="post")
+            div.py-2
                 label(for="email") Email 
-                input(type="text", name="email", id="email", placeholder="john.doe@gmail.com")
-            div
+                input(type="text", 
+                    name="email", 
+                    id="email", 
+                    placeholder="john.doe@gmail.com",
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
                 label(for="password") Password 
-                input(type="password", name="password", id="password")
-            button(type="submit") Login
-    
-    script(src="../../js/login-form.js")
+                input(type="password", 
+                    name="password", 
+                    id="password",
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            button(
+                type="submit",
+                class="border-2 p-1 rounded border-blue") Login

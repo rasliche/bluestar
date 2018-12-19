@@ -3,14 +3,13 @@ extends ../layouts/main-layout
 block content
     h1 #{pageTitle}
     div#register-form.text-center
-        form
+        form(action="/register", method="post")
             div.py-2
                 label(for="email") Email 
                 input(
                     type="text", 
                     name="email", 
                     id="email",
-                    v-model="userData.email",
                     placeholder="john.doe@gmail.com",
                     class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
             div.py-2
@@ -19,7 +18,6 @@ block content
                     type="password", 
                     name="password", 
                     id="password",
-                    v-model="userData.password",
                     class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
             div.py-2
                 label(for="password-match") Repeat Password 
@@ -27,11 +25,7 @@ block content
                     type="password", 
                     name="passwordMatch", 
                     id="passwordMatch",
-                    v-model="userData.passwordMatch",
                     class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
-            button#submit(
-                @click.prevent="submit",
-                class="{formSubmitted: disabled}",
+            button(
+                type="submit",
                 class="border-2 p-1 rounded border-blue") Register
-
-    script(src="../../js/register-form.js")
