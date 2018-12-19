@@ -7,7 +7,5 @@ exports.getAddUser = (req, res, next) => {
 }
 
 exports.postAddUser = (req, res, next) => {
-    const name = req.body.name
-    const user = new User({name})
-    user.save()
+    
 }
