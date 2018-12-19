@@ -1,8 +1,13 @@
 nav.flex
     a(href="/").mr-4 Home
-    a(href="/shops").mr-4 Shops
+    a(href="/about").mr-4 About
     a(href="/training").mr-4 Training
-    a(href="/admin").mr-4 Admin
-    a(href="/admin/add-shop").mr-4 Add Shop
-    a(href="/auth/register").mr-4 Register
-    a(href="/auth/login").mr-4 Login
+    a(href="/community").mr-4 Community
+    //- a(href="/shops").mr-4 Shops
+    //- a(href="/admin").mr-4 Admin
+    //- a(href="/admin/add-shop").mr-4 Add Shop
+    a(href="/register").mr-4 Register
+    unless user.isLoggedIn
+        a(href="/login").mr-4 Login
+    else
+        a(href="/me").mr-4 Me

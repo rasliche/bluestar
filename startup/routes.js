@@ -16,12 +16,17 @@ module.exports = function(app) {
     app.use('/api/shops', shops)
 
     app.get('/', (req, res, next) => {
-        res.render('index', {pageTitle: "Blue Star"})
+        res.render('index', {
+            pageTitle: "Blue Star",
+            user: {
+                isLoggedIn: true
+            }
+        })
     })
     app.use('/training', trainingRoutes)
     app.use('/admin', adminRoutes)
     app.use('/community', communityRoutes)
-    app.use('/auth', authRoutes)
+    app.use(authRoutes)
     app.use(errorController.get404)
     
     
