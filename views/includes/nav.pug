@@ -6,8 +6,8 @@ nav.flex
     //- a(href="/shops").mr-4 Shops
     //- a(href="/admin").mr-4 Admin
     //- a(href="/admin/add-shop").mr-4 Add Shop
-    a(href="/register").mr-4 Register
-    unless user.isLoggedIn
+    unless loggedIn
+        a(href="/register").mr-4 Register
         a(href="/login").mr-4 Login
     else
         a(href="/me").mr-4 Me

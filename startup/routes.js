@@ -18,9 +18,7 @@ module.exports = function(app) {
     app.get('/', (req, res, next) => {
         res.render('index', {
             pageTitle: "Blue Star",
-            user: {
-                isLoggedIn: true
-            }
+            loggedIn: req.session.loggedIn
         })
     })
     app.use('/training', trainingRoutes)

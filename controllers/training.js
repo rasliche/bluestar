@@ -12,9 +12,7 @@ const FISHING_CURRICULUM = [
 exports.getMe = (req, res, next) => {
     res.render('user/me', {
         pageTitle: "My Profile",
-        user: {
-            name: 'Eric Raslich'
-        },
+        loggedIn: req.session.loggedIn,
         nextTrainingLink: '/'
     })
 }
@@ -31,7 +29,8 @@ exports.getDivingCurriculum = (req, res, next) => {
     // Fetch all diving related modules
     res.render('training/curriculum', {
         pageTitle: 'Diving',
-        curriculum: DIVING_CURRICULUM
+        curriculum: DIVING_CURRICULUM,
+        loggedIn: req.session.loggedIn
     })
 }
 
@@ -39,10 +38,13 @@ exports.getFishingCurriculum = (req, res, next) => {
     // Fetch all fishing related modules
     res.render('training/curriculum', {
         pageTitle: 'Fishing',
-        curriculum: FISHING_CURRICULUM
+        curriculum: FISHING_CURRICULUM,
+        loggedIn: req.session.loggedIn
     })
 }
 
 exports.getTrainingModule = (req, res, next) => {
-    res.render('training/modules/'+req.params.moduleName)
+    res.render('training/modules/'+req.params.moduleName, {
+        loggedIn: req.session.loggedIn
+    })
 }

@@ -5,13 +5,15 @@ exports.getShops = (req, res, next) => {
 
     res.render('shop/index', {
         pageTitle: 'Shops',
-        shops: shops
+        shops: shops,
+        loggedIn: req.session.loggedIn
     })
 }
 
 exports.getAddShop = (req, res, next) => {
     res.render('admin/add-shop', {
-        pageTitle: 'Add Shop'
+        pageTitle: 'Add Shop',
+        loggedIn: req.session.loggedIn
     })
 }
 
