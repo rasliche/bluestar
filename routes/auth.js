@@ -3,16 +3,19 @@ const router = express.Router()
 
 const authController = require('../controllers/auth')
 
-// GET /auth/register
+// GET /register
 router.get('/register', authController.getRegister)
 
-// GET /auth/register
+// POST /register
 router.post('/register', authController.postRegister)
 
-// GET /auth/login
+// GET /login
 router.get('/login', authController.getLogin)
 
-// GET /auth/login
+// POST /login
 router.post('/login', authController.postLogin)
+
+// POST /logout
+router.post('/logout', authController.postLogout)
 
 module.exports = router
