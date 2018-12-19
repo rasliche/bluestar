@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         unique: true,
+        min: 5,
+        max: 255,
         required: true
     },
     password: {
@@ -17,6 +19,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     records: [
+        // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
         { 
             year: Number,
             isComplete: Boolean,
@@ -45,10 +48,9 @@ const userSchema = new mongoose.Schema({
 
 function validateUser(user) {
     const schema = {
-        email: Joi.string().required(),
+        email: Joi.string().min(5).max(255).required(),
         password: Joi.string().required()
     }
-
     return Joi.validate(user, schema)
 }
 
