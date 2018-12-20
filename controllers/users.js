@@ -1,18 +1,19 @@
 const { User } = require('../models/user')
 
 
-exports.getMe = async (req, res, next) => {
-    if (!req.session.user) return res.redirect('/login')
-
+exports.getMe = (req, res, next) => {
     res.render('user/me', {
-        user: req.session.user
+        pageTitle: "My Profile",
+        user: req.session.user,
+        loggedIn: !!req.session.user,
+        nextTrainingLink: '/'
     })
 }
 
 exports.getAddUser = (req, res, next) => {
     res.render('admin/add-user', {
         pageTitle: 'Add User',
-        loggedIn: req.session.loggedIn
+        loggedIn: !!req.session.user
     })
 }
 
