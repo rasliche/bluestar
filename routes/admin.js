@@ -1,7 +1,5 @@
 const express = require('express')
 
-const shopsController = require('../controllers/shops')
-const usersController = require('../controllers/users')
 const adminController = require('../controllers/admin')
 
 const router = express.Router()
@@ -16,12 +14,15 @@ router.get('/shops')
 router.get('/users')
 
 // GET /admin/add-shop
-router.get('/add-shop', shopsController.getAddShop)
-
-// GET /admin/add-user
-router.get('/add-user', usersController.getAddUser)
+router.get('/add-shop', adminController.getAddShop)
 
 // POST /admin/add-shop
-router.post('/add-shop', shopsController.postShops)
+router.post('/add-shop', adminController.postAddShop)
+
+// GET /admin/add-user
+router.get('/add-user', adminController.getAddUser)
+
+// POST /admin/add-shop
+router.post('/add-user', adminController.postAddUser)
 
 module.exports = router
