@@ -1,26 +1,10 @@
-const Shop = require('../models/shop')
+const { Shop } = require('../models/shop')
 
-exports.getShops = (req, res, next) => {
-    const shops = Shop.fetchAll()
-
+exports.getShops = async (req, res, next) => {
+    const shops = await Shop.find()
+    console.log(shops)
     res.render('shop/index', {
-        pageTitle: 'Shops',
         shops: shops,
-        loggedIn: !!req.session.user
+        user: req.session.user
     })
-}
-
-exports.getAddShop = (req, res, next) => {
-    res.render('admin/add-shop', {
-        pageTitle: 'Add Shop',
-        loggedIn: !!req.session.user
-    })
-}
-
-exports.postShops = (req, res, next) => {
-    console.log(req.body)
-    const shop = new Shop(req.body.name)
-    shop.save()
-
-    res.redirect('/shops')
 }
