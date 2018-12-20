@@ -12,9 +12,6 @@ router.get('/', (req, res, next) => {
     })
 })
 
-// GET /training/me
-router.get('/me', trainingController.getMe)
-
 // GET /training/diving
 router.get('/diving', trainingController.getDivingCurriculum) // List all Diving modules
 
