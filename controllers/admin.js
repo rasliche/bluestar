@@ -17,7 +17,18 @@ exports.getAddShop = async (req, res, next) => {
 }
 
 exports.postAddShop = async (req, res, next) => {
-    res.redirect('/admin')
+    const name = req.body.name
+    const password = req.body.password
+
+    let shop = await Shop.findOne({ name: name })
+    if (shop) return res.redirect('/admin/shops')
+
+    shop = new Shop({
+        name: name,
+        password: password
+    })
+    await shop.save()
+    res.redirect('/shops')
 }
 
 exports.getAddUser = async (req, res, next) => {
