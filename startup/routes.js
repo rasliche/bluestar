@@ -2,6 +2,7 @@ const express = require('express')
 
 const adminRoutes = require('../routes/admin')
 const usersRoutes = require('../routes/users')
+const shopsRoutes = require('../routes/shops')
 const trainingRoutes = require('../routes/training')
 const communityRoutes = require('../routes/community')
 const authRoutes = require('../routes/auth')
@@ -19,6 +20,7 @@ module.exports = function(app) {
     })
 
     app.use('/', usersRoutes)
+    app.use('/shops', shopsRoutes)
     app.use('/training', trainingRoutes)
     app.use('/admin', [auth, admin], adminRoutes)
     app.use('/community', communityRoutes)
