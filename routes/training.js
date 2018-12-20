@@ -4,8 +4,10 @@ const router = express.Router()
 const usersController = require('../controllers/users')
 const trainingController = require('../controllers/training')
 
+const auth = require('../middleware/auth')
+
 // GET /training
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
     res.render('training/index', {
         pageTitle: "Training",
         loggedIn: req.session.loggedIn
