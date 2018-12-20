@@ -28,19 +28,30 @@ exports.postRegister = async (req, res, next) => {
 }
 
 exports.getLogin = (req, res, next) => {
-    const email = req.body.email
-
     res.render('auth/login', {
-        pageTitle: "Login",
-        loggedIn: req.session.loggedIn
+        pageTitle: "Login"
     })
 }
 
-exports.postLogin = (req, res, next) => {
-    console.log("req.body: ", req.body)
-    const email = req.body.email
-    const password = req.body.password
-    // req.session.loggedIn = true
+exports.postLogin = async (req, res, next) => {
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) return res.redirect('/login')
+
+    const validPassword = await bcrypt.compare(req.body.password, user.password)
+    if (!validPassword) return res.redirect('/login')
+
+    req.session.loggedIn = true
+    req.session.user = _.pick(user, 
+        [
+            '_id', 
+            'name', 
+            'email', 
+            'shops',
+            'records', 
+            'isAdmin', 
+            'isManager'
+        ])
+    await req.session.save()
     res.redirect('/me')
 }
 
