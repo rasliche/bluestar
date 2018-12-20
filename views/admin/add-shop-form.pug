@@ -1,0 +1,16 @@
+form(action="/admin/add-shop", method="post").border.text-center
+    div.py-2
+        label(for="name").px-2 Shop Name
+        input(
+            type="text", 
+            id="title", 
+            name="name",
+            class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+    div.py-2
+        label(for="password").px-2 Password
+        input(
+            type="text", 
+            id="password", 
+            name="password",
+            class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+    button(type="submit") Add
