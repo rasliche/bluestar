@@ -5,7 +5,7 @@ const { User } = require('../models/user')
 exports.getRegister = (req, res, next) => {
     res.render('auth/register', {
         pageTitle: "Register",
-        loggedIn: req.session.loggedIn
+        loggedIn: !!req.session.user
     })
 }
 

@@ -7,7 +7,7 @@ exports.getAdminIndex = async (req, res, next) => {
     res.render('admin/index', {
         pagetitle: 'Admin Panel',
         users: users,
-        loggedIn: !!req.session.user,
+        user: req.session.user
         // shops: Shop.fetchAll()
     })
 }
