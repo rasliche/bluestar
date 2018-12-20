@@ -3,9 +3,14 @@ extends ../layouts/main-layout.pug
 block content
     h1 #{ user.name }
     p My email is: #{ user.email }
-    p I am associated with 
-        each shop in user.shops.length ? shops : ['no shops at this time']
-            | #{shop}
+    p I am associated with
+        each shop in user.shops.length ? user.shops : ['no shops at this time']
+            //- Make these an anchor tag?
+            |  #{shop}
+            if (user.shops.length > 2 && (user.shops.indexOf(shop) !== (user.shops.length-1)))
+                | ,
+            if user.shops.indexOf(shop) === (user.shops.length -2)
+                |  and
         | .
     if user.isManager.length > 0        
         p I am a manager of  
