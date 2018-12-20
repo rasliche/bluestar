@@ -2,7 +2,11 @@ extends ../layouts/main-layout.pug
 
 block content
     h1 #{ user.name }
-    p My email is: #{ user.email }
+    p Email: #{ user.email }
+    if user.isAdmin
+        p You are an Administrator.
+        p See your #[a(href="/admin") administrator] options.
+
     p I am associated with
         each shop in user.shops.length ? user.shops : ['no shops at this time']
             //- Make these an anchor tag?
@@ -12,6 +16,7 @@ block content
             if user.shops.indexOf(shop) === (user.shops.length -2)
                 |  and
         | .
+
     if user.isManager.length > 0        
         p I am a manager of  
             each shop in user.isManager.length ? shops : ['no shops at this time']
