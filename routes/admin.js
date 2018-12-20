@@ -10,12 +10,6 @@ const router = express.Router()
 // GET /admin
 router.get('/', adminController.getAdminIndex)
 
-// GET /admin/shops
-router.get('/shops')
-
-// GET /admin/users
-router.get('/users')
-
 // GET /admin/add-shop
 router.get('/add-shop', adminController.getAddShop)
 
