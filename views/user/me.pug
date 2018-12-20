@@ -2,5 +2,13 @@ extends ../layouts/main-layout.pug
 
 block content
     h1 #{ user.name }
+    p My email is: #{ user.email }
+    p I am associated with 
+        each shop in user.shops.length ? shops : ['no shops at this time']
+            span= shop
+            
+    p I am a manager of  
+        each shop in user.isManager.length ? shops : ['no shops at this time']
+            span= shop
 
     a(href=nextTrainingLink) Next Training Course

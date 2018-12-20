@@ -2,9 +2,10 @@ const { User } = require('../models/user')
 
 
 exports.getMe = async (req, res, next) => {
-    const user = await User.findById(req.session.user._id)
+    if (!req.session.user) return res.redirect('/login')
+
     res.render('user/me', {
-        user: user
+        user: req.session.user
     })
 }
 
