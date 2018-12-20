@@ -6,7 +6,7 @@ block content
     p I am associated with
         each shop in user.shops.length ? user.shops : ['no shops at this time']
             //- Make these an anchor tag?
-            |  #{shop}
+            span.text-blue-dark  #{shop}
             if (user.shops.length > 2 && (user.shops.indexOf(shop) !== (user.shops.length-1)))
                 | ,
             if user.shops.indexOf(shop) === (user.shops.length -2)
