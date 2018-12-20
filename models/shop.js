@@ -5,7 +5,12 @@ const shopSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
     
     name: {
-        type: String
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
     },
     email: {
         type: String
@@ -43,6 +48,7 @@ const shopSchema = new mongoose.Schema({
 function validateShop(shop) {
     const schema = {
         name: Joi.string().required(),
+        password: Joi.string().required(),
         email: Joi.string(),
         phone: Joi.string(),
         website: Joi.string()
@@ -54,4 +60,4 @@ function validateShop(shop) {
 const Shop = mongoose.model('Shop', shopSchema)
 
 module.exports.Shop = Shop
-module.exports.validate = validateShop
+module.exports.validateShop = validateShop
