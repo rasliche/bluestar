@@ -10,7 +10,6 @@ const auth = require('../middleware/auth')
 router.get('/', auth, (req, res, next) => {
     res.render('training/index', {
         pageTitle: "Training",
-        loggedIn: !!req.session.user,
         user: req.session.user
     })
 })
