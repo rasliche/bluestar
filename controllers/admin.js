@@ -2,7 +2,7 @@ const { User } = require('../models/user')
 const { Shop } = require('../models/shop')
 
 exports.getAdminIndex = async (req, res, next) => {
-    const users = await User.find()
+    const users = await User.find().select(["-password"])
     console.log(users)
     res.render('admin/index', {
         pagetitle: 'Admin Panel',
@@ -17,15 +17,12 @@ exports.getAddShop = async (req, res, next) => {
 }
 
 exports.postAddShop = async (req, res, next) => {
-    const name = req.body.name
-    const password = req.body.password
-
-    let shop = await Shop.findOne({ name: name })
-    if (shop) return res.redirect('/admin/shops')
+    let shop = await Shop.findOne({ name: req.body.name })
+    if (shop) return res.redirect('/admin')
 
     shop = new Shop({
-        name: name,
-        password: password
+        name: req.body.name,
+        password: req.body.password
     })
     await shop.save()
     res.redirect('/shops')
