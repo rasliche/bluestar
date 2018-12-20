@@ -8,14 +8,6 @@ const FISHING_CURRICULUM = [
     {title: 'About Florida Keys National Marine Sanctuary', slug: 'about-fknms', id:2},
 ]
 
-exports.postRegister = (reg, res, next) => {
-    
-}
-
-exports.postLogin = (reg, res, next) => {
-
-}
-
 exports.getDivingCurriculum = (req, res, next) => {
     // Fetch all diving related modules
     res.render('training/curriculum', {
