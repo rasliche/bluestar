@@ -6,9 +6,9 @@ block content
     p I am associated with 
         each shop in user.shops.length ? shops : ['no shops at this time']
             span= shop
-            
-    p I am a manager of  
-        each shop in user.isManager.length ? shops : ['no shops at this time']
-            span= shop
+    if user.isManager.length > 0        
+        p I am a manager of  
+            each shop in user.isManager.length ? shops : ['no shops at this time']
+                span= shop
 
     a(href=nextTrainingLink) Next Training Course
