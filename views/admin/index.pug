@@ -2,7 +2,11 @@ extends ../layouts/main-layout.pug
 
 block content
     h1 Admin Panel
-    p Make changes to #[a(href="shops") shops] or #[a(href="users") users].
+    p Make changes to #[a(href="/shops") shops] or #[a(href="/users") users].
+
+    h3 Quick Add Shop
+
+    include ./add-shop-form
 
     div.mt-8
         h3 Last completed training
