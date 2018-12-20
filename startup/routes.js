@@ -1,9 +1,5 @@
 const express = require('express')
 
-const users = require('../routes/api/users')
-const shops = require('../routes/api/shops')
-
-
 const adminRoutes = require('../routes/admin')
 const usersRoutes = require('../routes/users')
 const trainingRoutes = require('../routes/training')
@@ -12,14 +8,10 @@ const authRoutes = require('../routes/auth')
 const errorController = require('../controllers/error')
 
 module.exports = function(app) {
-    app.use(express.json())
-    app.use('/api/users', users)
-    app.use('/api/shops', shops)
-
     app.get('/', (req, res, next) => {
         res.render('index', {
             pageTitle: "Blue Star",
-            loggedIn: req.session.loggedIn
+            user: req.session.user
         })
     })
 

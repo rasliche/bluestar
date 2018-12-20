@@ -4,8 +4,7 @@ const { User } = require('../models/user')
 
 exports.getRegister = (req, res, next) => {
     res.render('auth/register', {
-        pageTitle: "Register",
-        loggedIn: req.session.loggedIn
+        pageTitle: "Register"
     })
 }
 
@@ -40,7 +39,6 @@ exports.postLogin = async (req, res, next) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!validPassword) return res.redirect('/login')
 
-    req.session.loggedIn = true
     req.session.user = _.pick(user, 
         [
             '_id', 

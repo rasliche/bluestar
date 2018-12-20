@@ -8,15 +8,6 @@ const FISHING_CURRICULUM = [
     {title: 'About Florida Keys National Marine Sanctuary', slug: 'about-fknms', id:2},
 ]
 
-
-exports.getMe = (req, res, next) => {
-    res.render('user/me', {
-        pageTitle: "My Profile",
-        loggedIn: req.session.loggedIn,
-        nextTrainingLink: '/'
-    })
-}
-
 exports.postRegister = (reg, res, next) => {
     
 }
@@ -30,7 +21,7 @@ exports.getDivingCurriculum = (req, res, next) => {
     res.render('training/curriculum', {
         pageTitle: 'Diving',
         curriculum: DIVING_CURRICULUM,
-        loggedIn: req.session.loggedIn
+        loggedIn: !!req.session.user
     })
 }
 
@@ -39,12 +30,12 @@ exports.getFishingCurriculum = (req, res, next) => {
     res.render('training/curriculum', {
         pageTitle: 'Fishing',
         curriculum: FISHING_CURRICULUM,
-        loggedIn: req.session.loggedIn
+        loggedIn: !!req.session.user
     })
 }
 
 exports.getTrainingModule = (req, res, next) => {
     res.render('training/modules/'+req.params.moduleName, {
-        loggedIn: req.session.loggedIn
+        loggedIn: !!req.session.user
     })
 }
