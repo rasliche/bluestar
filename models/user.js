@@ -37,13 +37,23 @@ const userSchema = new mongoose.Schema({
             }
         }
     ],
-    shops: [ String ],
+    shops: [
+        {
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: 'Shop'
+        }
+    ],
     isAdmin: {
         type:Boolean,
         default: false
     },
     // Is this the best way to model the relationship?
-    isManager: [ String ]
+    isManager: [ 
+        {
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: 'Shop'
+        }
+    ]
 })
 
 function validateUser(user) {

@@ -25,7 +25,12 @@ const shopSchema = new mongoose.Schema({
             }
         }
     ],
-    managers: [ mongoose.SchemaTypes.ObjectId ],
+    managers: [
+        {
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: 'User'
+         }
+    ],
     region: {
         type: String,
         enum: [ 'upper', 'middle', 'lower', 'keywest']
