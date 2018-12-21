@@ -4,4 +4,6 @@ block content
     h1 List of Shops
     ul
         each shop in shops
-            li= shop.name
+            li #{shop.name}
+                if user.isAdmin
+                    |  #[a(href="edit/"+shop._id) Edit]
