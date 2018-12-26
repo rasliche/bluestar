@@ -3,6 +3,8 @@ extends ../layouts/main-layout
 block content
     h1 #{pageTitle}
     div#register-form.text-center
+        if !!errorMessage
+            p.border.border-red= errorMessage
         form(action="/register", method="post")
             div.py-2
                 label(for="email") Email 
