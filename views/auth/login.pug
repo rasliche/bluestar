@@ -5,6 +5,8 @@ block content
     div#login-form.text-center
         if !!errorMessage
             p.border.border-red= errorMessage
+        if !!successMessage
+            p.border.border-green= successMessage
         form(action="/login", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
             div.py-2
