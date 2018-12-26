@@ -2,9 +2,16 @@ const { User } = require('../models/user')
 
 
 exports.getMe = (req, res, next) => {
+    let message = req.flash('success')
+    if (message.length > 0) {
+        message = message[0]
+    } else {
+        message = null
+    }
     res.render('user/me', {
         user: req.session.user,
-        nextTrainingLink: '/'
+        nextTrainingLink: '/',
+        successMessage: message
     })
 }
 
