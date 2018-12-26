@@ -6,6 +6,7 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const csrf = require('csurf')
 const flash = require('connect-flash')
+const compression = require('compression')
 
 const csrfProtection = csrf()
 
@@ -20,6 +21,7 @@ const store = new MongoDBStore({
 
 module.exports = function(app) {
     app.use(helmet())
+    app.use(compression())
     app.use(express.urlencoded({ extended: true }))
     app.use(session({
         secret: config.get('session-secret'),
