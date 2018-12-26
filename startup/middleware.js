@@ -4,6 +4,9 @@ const helmet = require('helmet')
 const express = require('express')
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
+const csrf = require('csurf')
+
+const csrfProtection = csrf()
 
 const { User } = require('../models/user')
 
@@ -23,6 +26,14 @@ module.exports = function(app) {
         saveUninitialized: false,
         store: store
     }))
+
+    app.use(csrfProtection)
+    
+    app.use((req, res, next) => {
+        res.locals.csrfToken = req.csrfToken()
+        res.locals.user = req.session.user
+        next()
+    })
 
     app.use((req, res, next) => {
         if (!req.session.user) return next()

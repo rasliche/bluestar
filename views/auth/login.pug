@@ -4,6 +4,7 @@ block content
     h1 #{ pageTitle }
     div#login-form.text-center
         form(action="/login", method="post")
+            input(type="hidden", name="_csrf", value=csrfToken)
             div.py-2
                 label(for="email") Email 
                 input(type="text", 

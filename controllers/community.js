@@ -8,7 +8,6 @@ exports.getIndex = (req, res, next) => {
 exports.getCalendar = (req, res, next) => {
     res.render('community/index', {
         pageTitle: "Calendar",
-        user: req.session.user
     })
 }
 

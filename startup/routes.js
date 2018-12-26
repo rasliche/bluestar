@@ -15,7 +15,6 @@ module.exports = function(app) {
     app.get('/', (req, res, next) => {
         res.render('index', {
             pageTitle: "Blue Star",
-            user: req.session.user
         })
     })
 
