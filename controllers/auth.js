@@ -3,8 +3,15 @@ const _ = require('lodash')
 const { User } = require('../models/user')
 
 exports.getRegister = (req, res, next) => {
+    let errorMessage = req.flash('error')
+    if (errorMessage.length > 0) {
+        errorMessage = errorMessage[0]
+    } else {
+        errorMessage = null
+    }
     res.render('auth/register', {
-        pageTitle: "Register"
+        pageTitle: "Register",
+        errorMessage: errorMessage
     })
 }
 
@@ -14,7 +21,14 @@ exports.postRegister = async (req, res, next) => {
     const confirmPassword = req.body.confirmPassword
 
     let user = await User.findOne({ email: email })
-    if (user) return res.redirect('/register')
+    if (user) {
+        req.flash('error', 'User email already exists. Log in or try again.')
+        return res.redirect('/register')
+    }
+
+    if (password !== confirmPassword) {
+        req.flash('error', "Passwords do not match.")
+    }
 
     const hashedPass = await bcrypt.hash(password, 10)
     user = new User({
