@@ -19,7 +19,7 @@ exports.postRegister = async (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
     const confirmPassword = req.body.confirmPassword
-
+    
     let user = await User.findOne({ email: email })
     if (user) {
         req.flash('error', 'User email already exists. Log in or try again.')
