@@ -1,6 +1,16 @@
+const config = require('config')
 const bcrypt = require('bcrypt')
 const _ = require('lodash')
+const nodemailer = require('nodemailer')
+const sendgridTransport = require('nodemailer-sendgrid-transport')
+
 const { User } = require('../models/user')
+
+const transporter = nodemailer.createTransport(sendgridTransport({
+    auth: {
+        api_key: config.get('sendgrid_api_key')
+    }
+}))
 
 exports.getRegister = (req, res, next) => {
     let errorMessage = req.flash('error')
@@ -36,6 +46,12 @@ exports.postRegister = async (req, res, next) => {
         password: hashedPass
     })
     await user.save()
+    transporter.sendMail({
+        to: email,
+        from: "BlueStar.Developer@gmail.com",
+        subject: "signup succeeded",
+        html: "<h1>You signed up successfully</h1"
+    })
     req.flash('success', 'Successfully registered! Please log in.')
     res.redirect('/login')
 }
