@@ -28,16 +28,23 @@ exports.postRegister = async (req, res, next) => {
 
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
-        pageTitle: "Login"
+        pageTitle: "Login",
+        errorMessage: req.flash('error')
         })
 }
 
 exports.postLogin = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email })
-    if (!user) return res.redirect('/login')
+    if (!user) {
+        req.flash('error', 'Invalid email or password.')
+        return res.redirect('/login')
+    }
 
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!validPassword) return res.redirect('/login')
+    if (!validPassword) {
+        req.flash('error', 'Invalid email or password.')
+        return res.redirect('/login')
+    }
 
     req.session.user = _.pick(user, 
         [
