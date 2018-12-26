@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "styles": "./node_modules/.bin/tailwind build public/css/styles.css -c./tailwind.js -o public/css/main.css",
     "test": "jest"
   },
