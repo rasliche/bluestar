@@ -1,6 +1,8 @@
 extends ../layouts/main-layout.pug
 
 block content
+    if successMessage
+        p.border.border-green.text-center= successMessage
     h1 #{ user.name }
     p Email: #{ user.email }
     if user.isAdmin
