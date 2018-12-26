@@ -3,6 +3,8 @@ extends ../layouts/main-layout.pug
 block content
     h1 #{ pageTitle }
     div#login-form.text-center
+        if !!errorMessage
+            p.border.border-red= errorMessage
         form(action="/login", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
             div.py-2
