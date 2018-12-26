@@ -57,6 +57,7 @@ exports.postLogin = async (req, res, next) => {
             'isManager'
         ])
     await req.session.save()
+    req.flash('success', 'Successfully logged in!')
     res.redirect('/me')
 }
 
