@@ -36,20 +36,20 @@ exports.postRegister = async (req, res, next) => {
         password: hashedPass
     })
     await user.save()
-
+    req.flash('success', 'Successfully registered! Please log in.')
     res.redirect('/login')
 }
 
 exports.getLogin = (req, res, next) => {
-    let message = req.flash('error')
-    if (message.length > 0) {
-        message = message[0]
+    let successMessage = req.flash('success')
+    if (successMessage.length > 0) {
+        successMessage = successMessage[0]
     } else {
-        message = null
+        successMessage = null
     }
     res.render('auth/login', {
         pageTitle: "Login",
-        errorMessage: message
+        successMessage: successMessage
         })
 }
 
