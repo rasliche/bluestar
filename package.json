@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "engines": "11.1.0",
+  "engines": {
+    "node": "11.X"
+  },
   "scripts": {
     "start": "node index.js",
     "start:dev": "nodemon index.js",
