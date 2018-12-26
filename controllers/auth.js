@@ -27,9 +27,15 @@ exports.postRegister = async (req, res, next) => {
 }
 
 exports.getLogin = (req, res, next) => {
+    let message = req.flash('error')
+    if (message.length > 0) {
+        message = message[0]
+    } else {
+        message = null
+    }
     res.render('auth/login', {
         pageTitle: "Login",
-        errorMessage: req.flash('error')
+        errorMessage: message
         })
 }
 
