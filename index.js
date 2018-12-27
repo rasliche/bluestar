@@ -7,7 +7,7 @@ app.set('view engine', 'pug')
 app.set('views', './views')
 app.use(express.static('public'))
 
-console.log('Application Name: ' + config.get('name'))
+// console.log('Application Name: ' + config.get('name'))
 
 // app.use((req, res, next) => {
     //     res.setHeader('Access-Control-Allow-Origin', '*')

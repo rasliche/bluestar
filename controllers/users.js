@@ -10,6 +10,7 @@ exports.getMe = (req, res, next) => {
     }
     res.render('user/me', {
         user: req.session.user,
+        pageTitle: "Me",
         nextTrainingLink: '/',
         successMessage: message
     })
