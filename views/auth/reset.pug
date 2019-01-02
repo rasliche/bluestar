@@ -5,9 +5,7 @@ block content
     div#login-form.text-center
         if !!errorMessage
             p.border.border-red= errorMessage
-        if !!successMessage
-            p.border.border-green= successMessage
-        form(action="/login", method="post")
+        form(action="/reset", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
             div.py-2
                 label(for="email") Email 
@@ -16,13 +14,6 @@ block content
                     id="email", 
                     placeholder="john.doe@gmail.com",
                     class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
-            div.py-2
-                label(for="password") Password 
-                input(type="password", 
-                    name="password", 
-                    id="password",
-                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
             button(
                 type="submit",
-                class="border-2 p-1 rounded border-blue") Login
-        a(href="/reset") Reset Password?
+                class="border-2 p-1 rounded border-blue") Reset Password
