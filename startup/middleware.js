@@ -39,13 +39,13 @@ module.exports = function(app) {
         next()
     })
 
-    app.use((req, res, next) => {
-        if (!req.session.user) return next()
-        // Find the current logged in user
-        User.findById(req.session.user._id)
-        console.log("Looking up the logged in user...")
-        next()
-    })
+    // app.use((req, res, next) => {
+    //     if (!req.session.user) return next()
+    //     // Find the current logged in user
+    //     User.findById(req.session.user._id)
+    //     console.log("Looking up the logged in user...")
+    //     next()
+    // })
     
     if (app.get('env') === 'development') {
         console.log(`app: ${app.get('env')}`)
