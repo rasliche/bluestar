@@ -10,6 +10,8 @@ nav.flex
         a(href="/register").mr-4 Register
         a(href="/login").mr-4 Login
     else
+        if user.isAdmin
+            a(href="/shops/new").mr-4 Add Shop
         a(href="/me").mr-4 Me
         form(action="/logout", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
