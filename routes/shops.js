@@ -6,13 +6,22 @@ const shopsController = require('../controllers/shops')
 // GET /shops
 router.get('/', shopsController.getShops)
 
-// POST /shops
-router.post('/', shopsController.postShops)
+// GET /shops/:shopId
+router.get('/:shopId', shopsController.getShop)
 
 // GET /shops/new
 router.get('/new', shopsController.getNewShop)
 
-// GET /shops/:id
-router.get('/:shopId', shopsController.getShop)
+// POST /shops
+router.post('/', shopsController.postShops)
+
+// GET /shops/:shopId/edit
+router.get('/:shopId/edit')
+
+// PUT /shops/:shopId
+router.put('/:shopId')
+
+// DELETE /shops/:shopId/delete
+router.delete('/:shopId/delete')
 
 module.exports = router
