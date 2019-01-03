@@ -21,7 +21,7 @@ module.exports = function(app) {
     app.use('/', usersRoutes)
     app.use('/shops', shopsRoutes)
     app.use('/training', trainingRoutes)
-    app.use('/admin', [auth, admin], adminRoutes)
+    app.use('/admin', adminRoutes)
     app.use('/community', communityRoutes)
     app.use(authRoutes)
     app.use(errorController.get404)
