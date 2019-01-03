@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start:dev": "nodemon index.js --trace-sync-io",
     "styles": "./node_modules/.bin/tailwind build public/css/styles.css -c./tailwind.js -o public/css/main.css",
     "test": "jest"
   },
