@@ -10,16 +10,13 @@ exports.getShops = async (req, res, next) => {
     })
 }
 
-exports.postShops = async (req, res, next) => {
-    let shop = new Shop({
-        name: req.body.name,
-        password: req.body.password
+exports.getNewShop = (req, res, next) => {
+    res.render('shop/new-shop', {
+        pageTitle: "New Shop",
+        user: req.session.user
     })
-
-    await shop.save()
-    res.redirect(`/shops/${shop._id}`)
 }
-
+    
 exports.getShop = async (req, res, next) => {
     const shop = await Shop.findById(req.params.shopId)
 
@@ -31,9 +28,36 @@ exports.getShop = async (req, res, next) => {
     })
 }
 
-exports.getNewShop = (req, res, next) => {
-    res.render('admin/new-shop', {
-        pageTitle: "New Shop",
-        user: req.session.user
+exports.postShops = async (req, res, next) => {
+    let shop = new Shop({
+        name: req.body.name,
+        password: req.body.password
     })
+
+    await shop.save()
+    res.redirect(`/shops/${shop._id}`)
+}
+
+exports.getEditShop = async (req, res, next) => {
+    const shop = await Shop.findById(req.params.shopId)
+    console.log(shop)
+    res.render('shop/edit-shop', {
+        pageTitle: `Edit ${shop.name}`,
+        shop: shop
+    })
+}
+
+exports.postUpdateShop = async (req, res, next) => {
+    const shop = await Shop.findByIdAndUpdate(req.params.shopId, {
+        name: req.body.name,
+        password: req.body.password
+    })
+
+    res.redirect(`/shops/${shop._id}`)
+}
+
+exports.deleteShop = async (req, res, next) => {
+    await Shop.findByIdAndDelete(req.params.shopId)
+
+    res.redirect(`/shops`)
 }
