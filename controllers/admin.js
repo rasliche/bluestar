@@ -2,18 +2,17 @@ const { User } = require('../models/user')
 const { Shop } = require('../models/shop')
 
 exports.getAdminIndex = async (req, res, next) => {
+    // select users with most recently completed modules
     const users = await User.find().select(["-password"])
+    const shops = await Shop.find()
     console.log(users)
     res.render('admin/index', {
-        pagetitle: 'Admin Panel',
+        pageTitle: 'Admin Panel',
         users: users,
+        shops: shops,
         user: req.session.user
         // shops: Shop.fetchAll()
     })
-}
-
-exports.getAddShop = async (req, res, next) => {
-    res.redirect('/admin')
 }
 
 exports.postAddShop = async (req, res, next) => {

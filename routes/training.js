@@ -9,7 +9,7 @@ const auth = require('../middleware/auth')
 // GET /training
 router.get('/', auth, (req, res, next) => {
     res.render('training/index', {
-        pageTitle: "Training",
+        pageTitle: "Get Trained",
         user: req.session.user
     })
 })

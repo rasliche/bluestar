@@ -1,18 +1,24 @@
-extends ../layouts/main-layout.pug
+extends ../layouts/main-layout
 
 block content
-    h1 Admin Panel
-    p Make changes to #[a(href="/shops") shops] or #[a(href="/users") users].
+    p.w-full Make changes to #[a(href="/shops") shops] or #[a(href="/users") users].
 
-    h3 Quick Add Shop
+    span(class="sm:w-1/2 w-full")
+        h3.text-sm Total Shops
+        p.text-5xl.ml-4 #{shops.length}
+    
+    span(class="sm:w-1/2 w-full")
+        h3.text-sm Total Users
+        p.text-5xl.ml-4 #{users.length}
 
-    include ./add-shop-form
-
-    div.mt-8
-        h3 Last completed training
+    div.mt-8.w-full.mx-8.flex.flex-wrap
+        h3.w-full Recent Users
+        //- - var i = 0
+        //- - var end = 4 || users.length-1
+        //- while i < end
         each user in users
             .h-12.px-4.w-full.border.flex.justify-between.items-center
-                p.flex-1= user.name
+                p.flex-1= user.email
                 p.flex-1= user.score
                 //- p.flex-1 #{ Date.now()}
 
