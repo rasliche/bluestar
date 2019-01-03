@@ -1,0 +1,6 @@
+extends ../layouts/main-layout
+
+block content
+    p= user.name
+    p= user.password ? 'User has a password.' : 'No Password?'
+    p= user.email

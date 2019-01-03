@@ -1,0 +1,23 @@
+extends ../layouts/main-layout
+
+block content
+    form(action="/users/"+user._id, method="post").border.text-center
+        input(type="hidden", name="_csrf", value=csrfToken)
+        div.py-2
+            label(for="name").px-2 Name
+            input(
+                type="text", 
+                id="name", 
+                name="name",
+                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+        div.py-2
+            label(for="email").px-2 Email
+            input(
+                type="text", 
+                id="email", 
+                name="email",
+                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+        button(type="submit") Update User
+    form(action="/users/"+user._id+"/delete", method="post")
+        input(type="hidden", name="_csrf", value=csrfToken)
+        button(type="submit") Delete User
