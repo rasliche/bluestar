@@ -35,7 +35,7 @@ module.exports = function(app) {
     
     app.use((req, res, next) => {
         res.locals.csrfToken = req.csrfToken()
-        res.locals.user = req.session.user
+        res.locals.loggedInUser = req.session.user
         next()
     })
 

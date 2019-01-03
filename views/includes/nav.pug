@@ -6,11 +6,11 @@ nav.flex
     //- a(href="/shops").mr-4 Shops
     //- a(href="/admin").mr-4 Admin
     //- a(href="/admin/add-shop").mr-4 Add Shop
-    unless user
+    unless loggedInUser
         a(href="/register").mr-4 Register
         a(href="/login").mr-4 Login
     else
-        if user.isAdmin
+        if loggedInUser.isAdmin
             a(href="/shops/new").mr-4 Add Shop
         a(href="/me").mr-4 Me
         form(action="/logout", method="post")

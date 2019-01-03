@@ -6,14 +6,14 @@ exports.getShops = async (req, res, next) => {
     res.render('shop/index', {
         pageTitle: "All Shops",
         shops: shops,
-        user: req.session.user
+        // user: req.session.user
     })
 }
 
 exports.getNewShop = (req, res, next) => {
     res.render('shop/new-shop', {
         pageTitle: "New Shop",
-        user: req.session.user
+        // user: req.session.user
     })
 }
     

@@ -5,5 +5,5 @@ block content
         each shop in shops
             li
                 a(href="/shops/"+shop._id) #{shop.name}
-                if user.isAdmin
+                if loggedInUser.isAdmin
                     |  #[a(href="/shops/"+shop._id+"/edit") Edit]

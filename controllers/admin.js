@@ -10,7 +10,7 @@ exports.getAdminIndex = async (req, res, next) => {
         pageTitle: 'Admin Panel',
         users: users,
         shops: shops,
-        user: req.session.user
+        // user: req.session.user
         // shops: Shop.fetchAll()
     })
 }
