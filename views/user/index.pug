@@ -4,6 +4,6 @@ block content
     ul
         each user in users
             li
-                a(href="/users/"+shop._id) #{user.email}
+                a(href="/users/"+user._id) #{user.email}
                 if loggedInUser.isAdmin
                     |  #[a(href="/users/"+user._id+"/edit") Edit]
