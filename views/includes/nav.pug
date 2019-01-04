@@ -11,8 +11,8 @@ nav.flex
         a(href="/login").mr-4 Login
     else
         if loggedInUser.isAdmin
-            a(href="/shops/new").mr-4 Add Shop
-        a(href="/me").mr-4 Me
+            a(href="/admin").mr-4 Admin
+        a(href="users/me").mr-4 Me
         form(action="/logout", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
             button(type="submit") Logout
