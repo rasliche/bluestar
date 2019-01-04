@@ -107,7 +107,7 @@ exports.postLogin = async (req, res, next) => {
         ])
     await req.session.save()
     req.flash('success', 'Successfully logged in!')
-    res.redirect('/me')
+    res.redirect('users/me')
 }
 
 exports.postLogout = (req, res, next) => {
