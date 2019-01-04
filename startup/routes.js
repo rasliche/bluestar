@@ -18,7 +18,7 @@ module.exports = function(app) {
         })
     })
 
-    app.use('/', usersRoutes)
+    app.use('/users', usersRoutes)
     app.use('/shops', shopsRoutes)
     app.use('/training', trainingRoutes)
     app.use('/admin', adminRoutes)
