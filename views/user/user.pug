@@ -1,6 +1,6 @@
 extends ../layouts/main-layout
 
 block content
-    p= user.name
-    p= user.password ? 'User has a password.' : 'No Password?'
-    p= user.email
+    p.w-full= user.name
+    p.w-full= user.email
+    p.w-full= user.password ? 'User has a password.' : 'No Password?'
