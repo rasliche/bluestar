@@ -1,5 +1,7 @@
+const mongoose = require('mongoose')
 const { User } = require('../models/user')
-
+const { Shop } = require('../models/shop')
+const _ = require('lodash')
 
 exports.getMe = (req, res, next) => {
     let message = req.flash('success')
@@ -37,6 +39,8 @@ exports.getUsers = async (req, res, next) => {
     
 exports.getUser = async (req, res, next) => {
     const user = await User.findById(req.params.userId)
+        // .select(['-password'])
+        .populate('shops')
 
     console.log(user)
 
@@ -59,21 +63,37 @@ exports.getUser = async (req, res, next) => {
 // }
 
 exports.getEditUser = async (req, res, next) => {
+    // Must be an admin or loggedInUser._id === :userId
     const user = await User.findById(req.params.userId)
-    console.log(user)
+        .select(['-password', '-records'])
+        .populate('shops', 'name')
+    // get list of shops user isn't part of
+    let shopList = await Shop.find().select('name')
+    // console.log(shopList[0]._id)
+    // console.log(typeof(shopList[0]._id))
+    _.pullAllWith(shopList, user.shops, (a, b) => a.equals(b))
+    // shopList = shopList.filter(shop => user.shops.find(selected => shop.equals(selected)) === undefined);
     res.render('user/edit-user', {
         pageTitle: `Edit ${user.name}`,
-        user: user
+        user: user,
+        shopList: shopList
     })
 }
 
 exports.postUpdateUser = async (req, res, next) => {
     const user = await User.findByIdAndUpdate(req.params.userId, {
-        name: req.body.name,
-        password: req.body.password
+        name: req.body.name
     })
 
     res.redirect(`/users/${user._id}`)
+}
+
+exports.postAddShopToUser = async (req, res, next) => {
+    const user = await User.findById(req.params.userId)
+    const shop = await Shop.findById(req.body.newshop)
+    user.shops.push(shop._id)
+    user.save()
+    res.redirect(`/users/${user._id}/edit`)
 }
 
 exports.deleteUser = async (req, res, next) => {
