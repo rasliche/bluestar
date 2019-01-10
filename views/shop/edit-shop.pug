@@ -1,7 +1,7 @@
 extends ../layouts/main-layout
 
 block content
-    form(action="/shops/"+shop._id, method="post").border.text-center
+    form(action="/shops/"+shop._id, method="post").border.text-center.w-full
         input(type="hidden", name="_csrf", value=csrfToken)
         div.py-2
             label(for="name").px-2 Shop Name
@@ -23,4 +23,4 @@ block content
         button(type="submit") Update Shop
     form(action="/shops/"+shop._id+"/delete", method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
-        button(type="submit") Delete Shop
+        button(type="submit").p-2.bg-red-lightest.rounded-full.text-sm Delete Shop
