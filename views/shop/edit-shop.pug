@@ -11,6 +11,7 @@ block content
                 id="name", 
                 name="name",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+        if loggedInUser.isAdmin                
         div.py-2
             label(for="password").px-2 Password
             input(
