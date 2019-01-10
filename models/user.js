@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
+const _ = require('lodash')
 
 const userSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
@@ -55,6 +56,16 @@ const userSchema = new mongoose.Schema({
     ]
 })
 
+userSchema.methods.joinShop = function(newShop) {
+    // Validate Shop Here
+    const shopInUser = _.includes(this.shops, newShop)
+    console.log(newShop)
+    if (!shopInUser) { this.shops.push(newShop) }
+    return this.save()
+}
+
+const User = mongoose.model('User', userSchema)
+
 function validateUser(user) {
     const schema = {
         email: Joi.string().min(5).max(255).required(),
@@ -62,8 +73,6 @@ function validateUser(user) {
     }
     return Joi.validate(user, schema)
 }
-
-const User = mongoose.model('User', userSchema)
 
 module.exports.User = User
 module.exports.validateUser = validateUser
