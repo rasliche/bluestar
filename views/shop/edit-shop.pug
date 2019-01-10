@@ -12,14 +12,14 @@ block content
                 name="name",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         if loggedInUser.isAdmin                
-        div.py-2
-            label(for="password").px-2 Password
-            input(
+            div.py-2
+                label(for="password").px-2 Password
+                input(
                     value=shop.password,
-                type="text", 
-                id="password", 
-                name="password",
-                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+                    type="text", 
+                    id="password", 
+                    name="password",
+                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         button(type="submit") Update Shop
     form(action="/shops/"+shop._id+"/delete", method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
