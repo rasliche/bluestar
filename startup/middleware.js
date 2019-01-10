@@ -33,19 +33,26 @@ module.exports = function(app) {
     app.use(csrfProtection)
     app.use(flash())
     
+    app.use(async (req, res, next) => {
+        try {
+            if (!req.session.user) return next()
+            // Find the current logged in user
+            const user = await User.findById(req.session.user._id)
+    
+            if (!user) return next()
+            req.user = user
+            next()
+        } catch (err) {
+            throw new Error(err)
+        }
+    })
+    
     app.use((req, res, next) => {
         res.locals.csrfToken = req.csrfToken()
         res.locals.loggedInUser = req.session.user
         next()
     })
 
-    // app.use((req, res, next) => {
-    //     if (!req.session.user) return next()
-    //     // Find the current logged in user
-    //     User.findById(req.session.user._id)
-    //     console.log("Looking up the logged in user...")
-    //     next()
-    // })
     
     if (app.get('env') === 'development') {
         console.log(`app: ${app.get('env')}`)
