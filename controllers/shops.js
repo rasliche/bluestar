@@ -1,7 +1,7 @@
 const { Shop } = require('../models/shop')
 
 exports.getShops = async (req, res, next) => {
-    const shops = await Shop.find()
+    const shops = await Shop.find().sort('-region name')
     console.log(shops)
     res.render('shop/index', {
         pageTitle: "All Shops",
