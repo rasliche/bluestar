@@ -84,13 +84,16 @@ exports.postUpdateUser = async (req, res, next) => {
     const user = await User.findByIdAndUpdate(req.params.userId, {
         name: req.body.name
     })
-
+    req.session.user = user
+    await req.session.save()
     res.redirect(`/users/${user._id}`)
 }
 
 exports.postAddShopToUser = async (req, res, next) => {
     const user = await User.findById(req.params.userId)
     user.joinShop(req.body.newshop)
+    req.session.user = user
+    await req.session.save()
     res.redirect(`/users/${user._id}/edit`)
 }
 
