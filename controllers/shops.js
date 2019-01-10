@@ -50,7 +50,7 @@ exports.getEditShop = async (req, res, next) => {
 exports.postUpdateShop = async (req, res, next) => {
     const shop = await Shop.findByIdAndUpdate(req.params.shopId, {
         name: req.body.name,
-        password: req.body.password
+        password: req.body.password || shop.password
     })
 
     res.redirect(`/shops/${shop._id}/edit`)
