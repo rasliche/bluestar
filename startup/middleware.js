@@ -24,7 +24,7 @@ module.exports = function(app) {
     app.use(compression())
     app.use(express.urlencoded({ extended: true }))
     app.use(session({
-        secret: process.env.session_secret,
+        secret: process.env.session-secret,
         resave: false,
         saveUninitialized: false,
         store: store
