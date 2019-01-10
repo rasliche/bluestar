@@ -24,6 +24,9 @@ router.get('/:userId', usersController.getUser)
 // DELETE /users/:userId/delete
 router.post('/:userId/delete', usersController.deleteUser)
 
+// POST /users/:userId/shops
+router.post('/:userId/shops', usersController.postAddShopToUser)
+
 // POST /users/:userId
 router.post('/:userId', usersController.postUpdateUser)
 

@@ -4,3 +4,5 @@ block content
     p.w-full= user.name
     p.w-full= user.email
     p.w-full= user.password ? 'User has a password.' : 'No Password?'
+    each shop in user.shops
+        p.w-full= shop.name

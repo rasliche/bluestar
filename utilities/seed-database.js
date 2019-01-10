@@ -15,6 +15,7 @@ exports.boostrapAdminUser = async () => {
         name: "Eric",
         email: 'rasliche@gmail.com',
         password: hashedPass,
+        shops: [],
         isAdmin: true
     })
     await adminUser.save()
@@ -25,6 +26,7 @@ exports.fakeUser = async () => {
     const fakeUser = new User({
         name: f.name.findName(),
         email: f.internet.email(),
+        shops: [],
         password: hashedPass,
 
     })
@@ -35,10 +37,10 @@ exports.fakeShop = async () => {
     const fakeShop = new Shop({
         name: f.company.companyName(),
         email: f.internet.email(),
-        password: f.lorem.word(),
+        password: "asdf",
         phone: f.phone.phoneNumber(),
         region: getRandomRegion(),
-        website: `${f.internet.domainName()}.${f.internet.domainSuffix()}`
+        website: f.internet.domainName()
     })
     await fakeShop.save()
 }

@@ -12,7 +12,7 @@ nav.flex
     else
         if loggedInUser.isAdmin
             a(href="/admin").mr-4 Admin
-        a(href="users/me").mr-4 Me
+        a(href="/users/me").mr-4 Me
         form(action="/logout", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
             button(type="submit") Logout

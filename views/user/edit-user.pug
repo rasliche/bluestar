@@ -1,7 +1,7 @@
 extends ../layouts/main-layout
 
 block content
-    form(action="/users/"+user._id, method="post").border.text-center
+    form(action="/users/"+user._id, method="post").border.text-center.w-full
         input(type="hidden", name="_csrf", value=csrfToken)
         div.py-2
             label(for="name").px-2 Name
@@ -19,7 +19,30 @@ block content
                 id="email", 
                 name="email",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+        div.py-2
+            each shop in user.shops
+                p= shop.name
         button(type="submit") Update User
-    form(action="/users/"+user._id+"/delete", method="post")
+
+    form(action="/users/"+user._id+"/shops", method="post").w-full
         input(type="hidden", name="_csrf", value=csrfToken)
-        button(type="submit") Delete User
+        div.py-2
+            //- show list of shops that user isn't part of
+            select(
+                id="newshop", 
+                name="newshop")
+                option(value="", disabled) Associate with a new shop:
+                each shop in shopList
+                    option(value=shop._id)= shop.name
+        div.py-2
+            label(for="shopPassword").px-2 Shop Password
+            input(
+                type="text", 
+                id="shopPassword", 
+                name="shopPassword",
+                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+        button(type="submit") Join Shop
+                
+    form(action="/users/"+user._id+"/delete", method="post").w-full
+        input(type="hidden", name="_csrf", value=csrfToken)
+        button(type="submit").p-2.bg-red-lightest.rounded-full.text-sm Delete User

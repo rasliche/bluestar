@@ -6,4 +6,5 @@ block content
             li
                 a(href="/shops/"+shop._id) #{shop.name}
                 if loggedInUser.isAdmin
-                    |  #[a(href="/shops/"+shop._id+"/edit") Edit]
+                    | (#{shop})
+                    | #[a(href="/shops/"+shop._id+"/edit").text-sm Edit]

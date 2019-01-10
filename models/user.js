@@ -38,20 +38,18 @@ const userSchema = new mongoose.Schema({
             }
         }
     ],
-    shops: [
-        {
-            type: mongoose.SchemaTypes.ObjectId,
-            ref: 'Shop'
-        }
-    ],
+    shops: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Shop'
+    }],
     isAdmin: {
-        type:Boolean,
+        type: Boolean,
         default: false
     },
     // Is this the best way to model the relationship?
     isManager: [ 
         {
-            type: mongoose.SchemaTypes.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Shop'
         }
     ]

@@ -6,6 +6,7 @@ const admin = require('../middleware/admin')
 const adminController = require('../controllers/admin')
 
 const { User } = require('../models/user')
+const { Shop } = require('../models/shop')
 const { boostrapAdminUser, fakeUser, fakeShop } = require('../utilities/seed-database')
 
 const router = express.Router()
@@ -18,6 +19,8 @@ router.get('/seed-database/', async (req, res, next) => {
     try {
         await User.deleteMany({})
         console.log('User collection removed...')
+        await Shop.deleteMany({})
+        console.log('Shop collection removed...')
 
         await boostrapAdminUser()
         console.log('Creating new fake users...')
