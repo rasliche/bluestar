@@ -20,6 +20,7 @@ exports.getMe = (req, res, next) => {
 
 exports.getUsers = async (req, res, next) => {
     const users = await User.find()
+    console.log(users)
     res.render('user/index', {
         pageTitle: "All Users",
         users: users,

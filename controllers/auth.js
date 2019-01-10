@@ -83,17 +83,10 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.postLogin = async (req, res, next) => {
-    
-    try {
-        const user = await User.findOne({ email: req.body.email })
-        if (!user) {
-            req.flash('error', 'Invalid email or password.')
-            return res.redirect('/login')
-        }
-    } catch (err) {
-        const error = new Error(err)
-        error.httpStatusCode = 500
-        return next(error)
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) {
+        req.flash('error', 'Invalid email or password.')
+        return res.redirect('/login')
     }
 
     const validPassword = await bcrypt.compare(req.body.password, user.password)
