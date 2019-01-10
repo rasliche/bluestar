@@ -53,7 +53,7 @@ exports.postUpdateShop = async (req, res, next) => {
         password: req.body.password
     })
 
-    res.redirect(`/shops/${shop._id}`)
+    res.redirect(`/shops/${shop._id}/edit`)
 }
 
 exports.deleteShop = async (req, res, next) => {
