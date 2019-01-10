@@ -1,5 +1,5 @@
 describe('User Model', () => {
-    test('Should do something', () => {
-
+    test('Should join shop if not already a member', () => {
+        
     })
 })
