@@ -90,9 +90,7 @@ exports.postUpdateUser = async (req, res, next) => {
 
 exports.postAddShopToUser = async (req, res, next) => {
     const user = await User.findById(req.params.userId)
-    const shop = await Shop.findById(req.body.newshop)
-    user.shops.push(shop._id)
-    user.save()
+    user.joinShop(req.body.newshop)
     res.redirect(`/users/${user._id}/edit`)
 }
 
