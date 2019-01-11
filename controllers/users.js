@@ -10,9 +10,10 @@ exports.getMe = (req, res, next) => {
     } else {
         message = null
     }
+
     res.render('user/me', {
         // user: req.session.user,
-        pageTitle: "Me",
+        pageTitle: req.session.user.name,
         nextTrainingLink: '/',
         successMessage: message
     })
@@ -66,12 +67,11 @@ exports.getEditUser = async (req, res, next) => {
     const user = await User.findById(req.params.userId)
         .select(['-password', '-records'])
         .populate('shops', 'name')
-    // get list of shops user isn't part of
+
+        // get list of shops user isn't part of
     let shopList = await Shop.find().select('name')
-    // console.log(shopList[0]._id)
-    // console.log(typeof(shopList[0]._id))
     _.pullAllWith(shopList, user.shops, (a, b) => a.equals(b))
-    // shopList = shopList.filter(shop => user.shops.find(selected => shop.equals(selected)) === undefined);
+
     res.render('user/edit-user', {
         pageTitle: `Edit ${user.name}`,
         user: user,
@@ -90,6 +90,8 @@ exports.postUpdateUser = async (req, res, next) => {
 
 exports.postAddShopToUser = async (req, res, next) => {
     const user = await User.findById(req.params.userId)
+        .select(['-password', '-records'])
+        .populate('shops', 'name')
     user.joinShop(req.body.newshop)
     req.session.user = user
     await req.session.save()

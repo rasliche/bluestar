@@ -34,9 +34,12 @@ module.exports = function(app) {
             if (!req.session.user) return next()
             // Find the current logged in user
             const user = await User.findById(req.session.user._id)
+                .populate('shops', 'name')
+                .select('-password')
     
             if (!user) return next()
-            req.user = user
+            req.session.user = user
+            await req.session.save()
             next()
         } catch (err) {
             throw new Error(err)
