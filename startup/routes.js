@@ -6,6 +6,9 @@ const communityRoutes = require('../routes/community')
 const authRoutes = require('../routes/auth')
 const errorController = require('../controllers/error')
 
+const auth = require('../middleware/auth')
+const admin = require('../middleware/admin')
+
 module.exports = function(app) {
     app.get('/', (req, res, next) => {
         res.render('index', {
@@ -13,10 +16,10 @@ module.exports = function(app) {
         })
     })
 
-    app.use('/users', usersRoutes)
+    app.use('/users', auth, usersRoutes)
     app.use('/shops', shopsRoutes)
-    app.use('/training', trainingRoutes)
-    app.use('/admin', adminRoutes)
+    app.use('/training', auth, trainingRoutes)
+    app.use('/admin', [auth, admin],adminRoutes)
     app.use('/community', communityRoutes)
     app.use(authRoutes)
 
