@@ -1,12 +1,13 @@
 const mongoose = require('mongoose')
 const config = require('config')
 
-module.exports = function() {
-    mongoose.connect(config.get('db'), {
-        useNewUrlParser: true
-    })
-        .then(result => {
-            console.log(`Connected to MongoDB at ${config.get('db')}`)
+module.exports = async function() {
+    try {
+        await mongoose.connect(config.get('db'), {
+            useNewUrlParser: true
         })
-        .catch(err => console.error(err))
+        console.log(`Connected to MongoDB at ${config.get('db')}`)
+    } catch (err) {
+        console.error(err)
+    }
 }
