@@ -49,7 +49,7 @@ module.exports = function(app) {
         next()
     })
     
-    if (app.get('env') === 'development') {
+    // if (app.get('env') === 'development') {
         console.log(`app: ${app.get('env')}`)
         app.use(morgan('dev'))
         console.log('Morgan enabled...')
@@ -58,5 +58,5 @@ module.exports = function(app) {
             console.log(req.session)
             next()
         })
-    }
+    // }
 }
