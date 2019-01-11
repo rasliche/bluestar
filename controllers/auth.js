@@ -83,38 +83,33 @@ exports.getLogin = (req, res, next) => {
 }
 
 exports.postLogin = async (req, res, next) => {
-    
     try {
         const user = await User.findOne({ email: req.body.email })
         if (!user) {
             req.flash('error', 'Invalid email or password.')
             return res.redirect('/login')
         }
+        const validPassword = await bcrypt.compare(req.body.password, user.password)
+        if (!validPassword) {
+            req.flash('error', 'Invalid email or password.')
+            return res.redirect('/login')
+        }
+        req.session.user = _.pick(user, 
+            [
+                '_id', 
+                'name', 
+                'email', 
+                'shops',
+                'records', 
+                'isAdmin', 
+                'isManager'
+            ])
+        await req.session.save()
+        req.flash('success', 'Successfully logged in!')
+        res.redirect('users/me')
     } catch (err) {
-        const error = new Error(err)
-        error.httpStatusCode = 500
-        return next(error)
+        return next(err)
     }
-
-    const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!validPassword) {
-        req.flash('error', 'Invalid email or password.')
-        return res.redirect('/login')
-    }
-
-    req.session.user = _.pick(user, 
-        [
-            '_id', 
-            'name', 
-            'email', 
-            'shops',
-            'records', 
-            'isAdmin', 
-            'isManager'
-        ])
-    await req.session.save()
-    req.flash('success', 'Successfully logged in!')
-    res.redirect('users/me')
 }
 
 exports.postLogout = (req, res, next) => {
