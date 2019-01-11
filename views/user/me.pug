@@ -2,8 +2,7 @@ extends ../layouts/main-layout.pug
 
 block content
     if successMessage
-        p.border.border-green.text-center= successMessage
-    h1 #{ loggedInUser.name }
+        p.border.border-green.text-center.w-full= successMessage
     p Email: #{ loggedInUser.email }
     if loggedInUser.isAdmin
         p You are an Administrator.
@@ -12,7 +11,7 @@ block content
     p I am associated with
         each shop in loggedInUser.shops.length ? loggedInUser.shops : ['no shops at this time']
             //- Make these an anchor tag?
-            span.text-blue-dark  #{shop}
+            span.text-blue-dark= shop.name
             if (loggedInUser.shops.length > 2 && (loggedInUser.shops.indexOf(shop) !== (loggedInUser.shops.length-1)))
                 | ,
             if loggedInUser.shops.indexOf(shop) === (loggedInUser.shops.length -2)
