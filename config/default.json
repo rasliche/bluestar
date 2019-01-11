@@ -1,6 +1,6 @@
 {
     "name": "FKNMS Blue Star",
-    "session-secret": "development_secret",
+    "session_secret": "development_secret",
     "sendgrid_api_key": "sendgrid_api_key",
     "db": ""
 }

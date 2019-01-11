@@ -1,5 +1,5 @@
 {
     "name": "FKNMS Blue Star - Development",
-    "session-secret": "development_secret",
+    "session_secret": "development_secret",
     "db": "mongodb://localhost:27017/bluestar"
 }

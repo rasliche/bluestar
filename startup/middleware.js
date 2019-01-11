@@ -10,7 +10,7 @@ const csrfProtection = csrf()
 
 const { User } = require('../models/user')
 
-const MONGODB_URI = process.env.db
+const MONGODB_URI = config.get('db')
 
 const store = new MongoDBStore({
     uri: MONGODB_URI,
@@ -20,7 +20,7 @@ const store = new MongoDBStore({
 module.exports = function(app) {
     app.use(express.urlencoded({ extended: true }))
     app.use(session({
-        secret: config.get('session-secret'),
+        secret: config.get('session_secret'),
         resave: false,
         saveUninitialized: false,
         store: store
