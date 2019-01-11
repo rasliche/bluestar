@@ -13,7 +13,7 @@ exports.getMe = (req, res, next) => {
 
     res.render('user/me', {
         // user: req.session.user,
-        pageTitle: req.session.user.name,
+        pageTitle: req.user.name,
         nextTrainingLink: '/',
         successMessage: message
     })

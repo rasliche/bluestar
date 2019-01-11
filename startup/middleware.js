@@ -25,7 +25,6 @@ module.exports = function(app) {
         saveUninitialized: false,
         store: store
     }))
-
     app.use(csrfProtection)
     app.use(flash())
     
@@ -36,10 +35,7 @@ module.exports = function(app) {
             const user = await User.findById(req.session.user._id)
                 .populate('shops', 'name')
                 .select('-password')
-    
-            if (!user) return next()
-            req.session.user = user
-            await req.session.save()
+            req.user = user
             next()
         } catch (err) {
             throw new Error(err)
@@ -48,7 +44,7 @@ module.exports = function(app) {
     
     app.use((req, res, next) => {
         res.locals.csrfToken = req.csrfToken()
-        res.locals.loggedInUser = req.session.user
+        res.locals.loggedInUser = req.user
         next()
     })
     
