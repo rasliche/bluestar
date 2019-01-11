@@ -3,5 +3,5 @@ module.exports = (req, res, next) => {
         return next()
     }
     req.flash('error', 'Not authorized to view the requested page.')
-    res.redirect('/login')
+    res.redirect('/')
 }
