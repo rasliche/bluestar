@@ -84,7 +84,8 @@ exports.getLogin = (req, res, next) => {
 
 exports.postLogin = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.email })
+        const user = await User.findOne({ email: req.body.email }).select('email password')
+        
         if (!user) {
             req.flash('error', 'Invalid email or password.')
             return res.redirect('/login')
@@ -94,16 +95,7 @@ exports.postLogin = async (req, res, next) => {
             req.flash('error', 'Invalid email or password.')
             return res.redirect('/login')
         }
-        req.session.user = _.pick(user, 
-            [
-                '_id', 
-                'name', 
-                'email', 
-                'shops',
-                'records', 
-                'isAdmin', 
-                'isManager'
-            ])
+        req.session.user = user
         await req.session.save()
         req.flash('success', 'Successfully logged in!')
         res.redirect('users/me')
@@ -112,11 +104,13 @@ exports.postLogin = async (req, res, next) => {
     }
 }
 
-exports.postLogout = (req, res, next) => {
-    req.session.destroy(err => {
-        if (err) console.log(err)
+exports.postLogout = async (req, res, next) => {
+    try {
+        await req.session.destroy()
         res.redirect('/')
-    })
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 exports.getReset = (req, res, next) => {
