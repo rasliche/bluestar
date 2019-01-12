@@ -93,8 +93,7 @@ exports.postAddShopToUser = async (req, res, next) => {
         .select(['-password', '-records'])
         .populate('shops', 'name')
     user.joinShop(req.body.newshop)
-    req.session.user = user
-    await req.session.save()
+    
     res.redirect(`/users/${user._id}/edit`)
 }
 
