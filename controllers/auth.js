@@ -95,7 +95,7 @@ exports.postLogin = async (req, res, next) => {
             req.flash('error', 'Invalid email or password.')
             return res.redirect('/login')
         }
-        req.session.user = user
+        req.session.user = user._id
         await req.session.save()
         req.flash('success', 'Successfully logged in!')
         res.redirect('users/me')
