@@ -56,11 +56,10 @@ const userSchema = new mongoose.Schema({
     ]
 })
 
-userSchema.methods.joinShop = function(newShop) {
+userSchema.methods.joinShop = function(newShopId) {
     // Validate Shop Here
-    const shopInUser = _.includes(this.shops, newShop)
-    console.log(newShop)
-    if (!shopInUser) { this.shops.push(newShop) }
+    const shopInUser = _.includes(this.shops, newShopId)
+    if (!shopInUser) { this.shops.push(newShopId) }
     return this.save()
 }
 

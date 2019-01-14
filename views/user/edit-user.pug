@@ -29,17 +29,17 @@ block content
             div.py-2
                 //- show list of shops that user isn't part of
                 select(
-                    id="newshop", 
-                    name="newshop")
+                    id="newShopId", 
+                    name="newShopId")
                     option(value="", disabled) Associate with a new shop:
                     each shop in shopList
                         option(value=shop._id)= shop.name
             div.py-2
-                label(for="shoppassword").px-2 Shop Password
+                label(for="shopPassword").px-2 Shop Password
                 input(
                     type="text", 
-                    id="shoppassword", 
-                    name="shoppassword",
+                    id="shopPassword", 
+                    name="shopSassword",
                     class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
             button(type="submit") Join Shop
                     
