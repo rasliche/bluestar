@@ -3,8 +3,8 @@ const { Shop } = require('../models/shop')
 
 exports.getAdminIndex = async (req, res, next) => {
     // select users with most recently completed modules
-    const users = await User.find().select(["-password"])
-    const shops = await Shop.find()
+    const users = await User.find().select(["email", "name"]).limit(15)
+    const shops = await Shop.find().countDocuments()
     res.render('admin/index', {
         pageTitle: 'Admin Panel',
         users: users,
