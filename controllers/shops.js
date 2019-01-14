@@ -1,6 +1,8 @@
 const { Shop } = require('../models/shop')
 
 exports.getShops = async (req, res, next) => {
+    // TODO: 
+    //  - pagination for shops
     const shops = await Shop.find().sort('-region name')
     console.log(shops)
     res.render('shop/index', {
@@ -33,7 +35,6 @@ exports.postShops = async (req, res, next) => {
         name: req.body.name,
         password: req.body.password
     })
-
     await shop.save()
     res.redirect(`/shops/${shop._id}`)
 }
