@@ -1,9 +1,11 @@
 const { Shop } = require('../models/shop')
+const { User } = require('../models/user')
 
 exports.getShops = async (req, res, next) => {
     // TODO: 
     //  - pagination for shops
-    const shops = await Shop.find().sort('-region name')
+    const shops = await Shop.find()
+        .sort('-region name')
     console.log(shops)
     res.render('shop/index', {
         pageTitle: "All Shops",
@@ -22,11 +24,15 @@ exports.getNewShop = (req, res, next) => {
 exports.getShop = async (req, res, next) => {
     const shop = await Shop.findById(req.params.shopId)
 
+    const staff = await User.find()
+        .where('shops').in(req.params.shopId)
+        .select('name id')
     console.log(shop)
 
     res.render('shop/shop', {
         pageTitle: shop.name,
-        shop: shop
+        shop: shop,
+        staff: staff
     })
 }
 
