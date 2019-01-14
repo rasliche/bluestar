@@ -89,11 +89,12 @@ exports.postUpdateUser = async (req, res, next) => {
 }
 
 exports.postAddShopToUser = async (req, res, next) => {
+    // TODO validate newShopId
     const user = await User.findById(req.params.userId)
         .select(['-password', '-records'])
         .populate('shops', 'name')
-    user.joinShop(req.body.newshop)
-    
+        
+    user.joinShop(req.body.newShopId)
     res.redirect(`/users/${user._id}/edit`)
 }
 

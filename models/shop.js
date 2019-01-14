@@ -22,10 +22,10 @@ const shopSchema = new mongoose.Schema({
         { 
             year: Number,
             isComplete: Boolean,
-            staff: [ {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: 'User'
-            } ],
+            // staff: [ {
+            //     type: mongoose.Schema.Types.ObjectId,
+            //     ref: 'User'
+            // } ],
             conservationActivity: {
                 name: String,
                 description: String,
