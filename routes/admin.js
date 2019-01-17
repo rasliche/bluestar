@@ -51,11 +51,6 @@ router.get('/seed-database/', async (req, res, next) => {
                 await user.joinShop(shop)
             }
         })
-        
-        // _.range(1,6).forEach((i) => {
-        //     console.log("Sliced Shops: ", slicedShops)
-        //     await fakeUser(slicedShops)
-        // })
 
         res.redirect('/admin')
     } catch (err) {
