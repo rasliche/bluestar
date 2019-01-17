@@ -1,18 +1,17 @@
-nav.flex.mt-2
-    a(href="/").mr-4.bg-blue-lightest.rounded Home
-    a(href="/about").mr-4.bg-blue-lightest.rounded About
-    a(href="/training").mr-4.bg-blue-lightest.rounded Training
-    a(href="/community").mr-4.bg-blue-lightest.rounded Community
-    //- a(href="/shops").mr-4 Shops
-    //- a(href="/admin").mr-4 Admin
-    //- a(href="/admin/add-shop").mr-4 Add Shop
+nav.flex.mt-2.mb-2
+    a(href="/").p-2.mr-1.bg-blue-lightest.rounded Home
+    a(href="/about").p-2.mr-1.bg-blue-lightest.rounded About
+    a(href="/training").p-2.mr-1.bg-blue-lightest.rounded Training
+    a(href="/community").p-2.mr-1.bg-blue-lightest.rounded Community
     unless loggedInUser
-        a(href="/register").mr-4.bg-blue-lightest.rounded Register
-        a(href="/login").mr-4.bg-blue-lightest.rounded Login
+        a(href="/register").p-2.mr-1.bg-blue-lightest.rounded Register
+        a(href="/login").p-2.mr-1.bg-blue-lightest.rounded Login
     else
         if loggedInUser.isAdmin
-            a(href="/admin").mr-4.bg-blue-lightest.rounded Admin
-        a(href="/users/me").mr-4.bg-blue-lightest.rounded Me
+            a(href="/admin").p-2.mr-1.bg-blue-lightest.rounded Admin
+            a(href="/shops").p-2.mr-1.bg-blue-lightest.rounded Shops
+            a(href="/admin/add-shop").p-2.mr-1.bg-blue-lightest.rounded Add Shop
+        a(href="/users/me").p-2.mr-1.bg-blue-lightest.rounded Me
         form(action="/logout", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
-            button(type="submit") Logout
+            button(type="submit").p-2.mr-1.bg-blue-lightest.rounded Logout
