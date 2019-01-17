@@ -3,7 +3,6 @@ const Joi = require('joi')
 
 const shopSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
-    
     name: {
         type: String,
         required: true
