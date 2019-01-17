@@ -1,5 +1,6 @@
 module.exports = (req, res, next) => {
-    if (req.session.user.isAdmin) { // or has the shop in the isManager array
+    const u = req.user
+    if (u.isAdmin || u.isManager.includes(req.params.ShopId)) {
         return next()
     }
     res.redirect('/login')
