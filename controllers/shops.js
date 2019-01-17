@@ -23,7 +23,6 @@ exports.getNewShop = (req, res, next) => {
     
 exports.getShop = async (req, res, next) => {
     const shop = await Shop.findById(req.params.shopId)
-
     const staff = await User.find()
         .where('shops').in(req.params.shopId)
         .select('name id')
