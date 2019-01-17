@@ -39,6 +39,10 @@ const shopSchema = new mongoose.Schema({
             ref: 'User'
          }
     ],
+    isActive: {
+        type: Boolean,
+        default: false
+    },
     region: {
         type: String,
         enum: [ 'upper', 'middle', 'lower', 'keywest']
