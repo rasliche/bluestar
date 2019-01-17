@@ -21,16 +21,16 @@ exports.boostrapAdminUser = async () => {
     await adminUser.save()
 }
 
-exports.fakeUser = async () => {
+exports.fakeUser = async (shops) => {
     const hashedPass = await bcrypt.hash(f.hacker.noun(), 12)
     const fakeUser = new User({
         name: f.name.findName(),
         email: f.internet.email(),
-        shops: [],
-        password: hashedPass,
-
+        shops: [...shops],
+        password: hashedPass
     })
     await fakeUser.save()
+    return fakeUser
 }
 
 exports.fakeShop = async () => {
@@ -43,4 +43,5 @@ exports.fakeShop = async () => {
         website: f.internet.domainName()
     })
     await fakeShop.save()
+    return fakeShop
 }
