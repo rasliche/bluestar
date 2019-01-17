@@ -2,10 +2,12 @@ extends ../layouts/main-layout
 
 block content
     .border.border-b-2.w-full
-    p= shop.password
-    p= shop.email
-    p= shop.phone
-    p= shop.managers
-    p= shop.records
-    for user in staff
-        p.w-full= user.name
+        p= shop.password
+        p= shop.email
+        p= shop.phone
+        p= shop.managers
+        p= shop.records
+    .border.border-b-2.w-full
+        h3 Staff
+        for user in staff
+            p.w-full= user.name

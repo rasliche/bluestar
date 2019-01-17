@@ -18,33 +18,50 @@ router.get('/', adminController.getAdminIndex)
 // GET /admin/seed-database
 router.get('/seed-database/', async (req, res, next) => {
     try {
-        const shops = []
+        let shopPromises = []
+        let userPromises = []
         let slicedShops
 
         await User.deleteMany({})
-        console.log('User collection removed...')
         await Shop.deleteMany({})
-        console.log('Shop collection removed...')
-
         await boostrapAdminUser()
-        console.log('Creating new fake users...')
         
-        _.forEach(_.range(1,10), () => {
-            shops.push(fakeShop())
+        _.range(1,4).forEach(i => {
+            shopPromises.push(fakeShop())
+        })
+
+        _.range(1,10).forEach(i => {
+            userPromises.push(fakeUser())
+        })
+
+        const shopResults = await Promise.all(shopPromises)
+        const userResults = await Promise.all(userPromises)
+        
+        console.log("Shops: ", shopResults)
+        console.log("Users: ", userResults)
+
+        _.forEach(userResults, async user => {
+            slicedShops = _.chain(shopResults)
+                .shuffle()
+                .slice(0, _.random(3))
+                .map(shop => shop._id)
+                .value()
+            console.log(slicedShops)
+            for (shop of slicedShops) {
+                await user.joinShop(shop)
+            }
         })
         
-        _.forEach(_.range(1,60), () => {
-            slicedShops = _.map(_.slice(_.shuffle(shops), 0, _.random(3)),  (shop) => {
-                return shop._id
-            })
-            fakeUser(slicedShops)
-        })
+        // _.range(1,6).forEach((i) => {
+        //     console.log("Sliced Shops: ", slicedShops)
+        //     await fakeUser(slicedShops)
+        // })
+
+        res.redirect('/admin')
     } catch (err) {
         console.log(err)
     }
 
-    console.log('Fake users created, check Users collection.')
-    res.redirect('/admin')
 })
 
 module.exports = router

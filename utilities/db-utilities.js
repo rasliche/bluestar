@@ -11,7 +11,7 @@ function getRandomRegion() {
 
 exports.boostrapAdminUser = async () => {
     const hashedPass = await bcrypt.hash('12345', 12)
-    const adminUser = new User({
+    let adminUser = new User({
         name: "Eric",
         email: 'rasliche@gmail.com',
         password: hashedPass,
@@ -19,22 +19,25 @@ exports.boostrapAdminUser = async () => {
         isAdmin: true
     })
     await adminUser.save()
+    // console.log("Admin User: ", adminUser)
+    return adminUser
 }
 
 exports.fakeUser = async (shops) => {
     const hashedPass = await bcrypt.hash(f.hacker.noun(), 12)
-    const fakeUser = new User({
+    let fakeUser = new User({
         name: f.name.findName(),
         email: f.internet.email(),
-        shops: [...shops],
+        shops: shops,
         password: hashedPass
     })
     await fakeUser.save()
+    // console.log("Fake user: ", fakeUser)
     return fakeUser
 }
 
 exports.fakeShop = async () => {
-    const fakeShop = new Shop({
+    let fakeShop = new Shop({
         name: f.company.companyName(),
         email: f.internet.email(),
         password: "asdf",
@@ -43,5 +46,6 @@ exports.fakeShop = async () => {
         website: f.internet.domainName()
     })
     await fakeShop.save()
+    // console.log("Fake Shop: ", fakeShop)
     return fakeShop
 }

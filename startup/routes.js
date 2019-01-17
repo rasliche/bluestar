@@ -19,7 +19,7 @@ module.exports = function(app) {
     app.use('/users', auth, usersRoutes)
     app.use('/shops', shopsRoutes)
     app.use('/training', auth, trainingRoutes)
-    app.use('/admin', [auth, admin],adminRoutes)
+    app.use('/admin',adminRoutes)
     app.use('/community', communityRoutes)
     app.use(authRoutes)
 
