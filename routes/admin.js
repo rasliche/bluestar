@@ -26,11 +26,11 @@ router.get('/seed-database/', async (req, res, next) => {
         await Shop.deleteMany({})
         await boostrapAdminUser()
         
-        _.range(1,4).forEach(i => {
+        _.range(1,16).forEach(i => {
             shopPromises.push(fakeShop())
         })
 
-        _.range(1,10).forEach(i => {
+        _.range(1,88).forEach(i => {
             userPromises.push(fakeUser())
         })
 
