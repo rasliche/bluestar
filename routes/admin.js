@@ -1,4 +1,5 @@
 const express = require('express')
+const _ = require('lodash')
 
 const auth = require('../middleware/auth')
 const admin = require('../middleware/admin')
@@ -17,6 +18,9 @@ router.get('/', adminController.getAdminIndex)
 // GET /admin/seed-database
 router.get('/seed-database/', async (req, res, next) => {
     try {
+        const shops = []
+        let slicedShops
+
         await User.deleteMany({})
         console.log('User collection removed...')
         await Shop.deleteMany({})
@@ -24,16 +28,17 @@ router.get('/seed-database/', async (req, res, next) => {
 
         await boostrapAdminUser()
         console.log('Creating new fake users...')
-
-        let i = 0;
-        while (i < 35) {
-            if (i % 6 === 0) { 
-                fakeShop()
-                console.log('Creating a fake shop...')
-            }
-            fakeUser()
-            i++
-        }
+        
+        _.forEach(_.range(1,10), () => {
+            shops.push(fakeShop())
+        })
+        
+        _.forEach(_.range(1,60), () => {
+            slicedShops = _.map(_.slice(_.shuffle(shops), 0, _.random(3)),  (shop) => {
+                return shop._id
+            })
+            fakeUser(slicedShops)
+        })
     } catch (err) {
         console.log(err)
     }
