@@ -26,6 +26,8 @@ exports.getShop = async (req, res, next) => {
     const staff = await User.find()
         .where('shops').in(req.params.shopId)
         .select('name id')
+
+    
     console.log(shop)
 
     res.render('shop/shop', {
