@@ -5,10 +5,12 @@ exports.getAdminIndex = async (req, res, next) => {
     // select users with most recently completed modules
     const users = await User.find().select(["email", "name"]).limit(15)
     const shops = await Shop.find().countDocuments()
+    const totalUsers = await User.estimatedDocumentCount()
     res.render('admin/index', {
         pageTitle: 'Admin Panel',
         users: users,
-        shops: shops
+        shops: shops,
+        totalUsers: totalUsers
     })
 }
 
