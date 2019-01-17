@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const Joi = require('joi')
 const _ = require('lodash')
 
+const Shop = require('./shop')
+
 const userSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
     name: {
