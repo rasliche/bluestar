@@ -1,17 +1,17 @@
 nav.flex.mt-2.mb-2
-    a(href="/").p-2.mr-1.bg-blue-lightest.rounded Home
-    a(href="/about").p-2.mr-1.bg-blue-lightest.rounded About
-    a(href="/training").p-2.mr-1.bg-blue-lightest.rounded Training
-    a(href="/community").p-2.mr-1.bg-blue-lightest.rounded Community
+    a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/") Home
+    a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/about") About
+    a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/training") Training
+    a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/community") Community
     unless loggedInUser
-        a(href="/register").p-2.mr-1.bg-blue-lightest.rounded Register
-        a(href="/login").p-2.mr-1.bg-blue-lightest.rounded Login
+        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/register") Register
+        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/login") Login
     else
         if loggedInUser.isAdmin
-            a(href="/admin").p-2.mr-1.bg-blue-lightest.rounded Admin
-            a(href="/shops").p-2.mr-1.bg-blue-lightest.rounded Shops
-            a(href="/admin/add-shop").p-2.mr-1.bg-blue-lightest.rounded Add Shop
-        a(href="/users/me").p-2.mr-1.bg-blue-lightest.rounded Me
+            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/admin") Admin
+            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/shops") Shops
+            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/admin/add-shop") Add Shop
+        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users/me") Me
         form(action="/logout", method="post")
             input(type="hidden", name="_csrf", value=csrfToken)
-            button(type="submit").p-2.mr-1.bg-blue-lightest.rounded Logout
+            button(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", type="submit") Logout
