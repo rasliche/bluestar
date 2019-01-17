@@ -12,8 +12,22 @@ function getRandomRegion() {
 exports.boostrapAdminUser = async () => {
     const hashedPass = await bcrypt.hash('12345', 12)
     let adminUser = new User({
-        name: "Eric",
-        email: 'rasliche@gmail.com',
+        name: "BlueStar Coordinator",
+        email: 'admin@test.com',
+        password: hashedPass,
+        shops: [],
+        isAdmin: true
+    })
+    await adminUser.save()
+    // console.log("Admin User: ", adminUser)
+    return adminUser
+}
+
+exports.boostrapManagerUser = async () => {
+    const hashedPass = await bcrypt.hash('54321', 12)
+    let adminUser = new User({
+        name: "Test Manager",
+        email: 'manager@test.com',
         password: hashedPass,
         shops: [],
         isAdmin: true
