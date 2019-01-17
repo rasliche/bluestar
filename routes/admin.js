@@ -7,7 +7,7 @@ const adminController = require('../controllers/admin')
 
 const { User } = require('../models/user')
 const { Shop } = require('../models/shop')
-const { boostrapAdminUser, fakeUser, fakeShop } = require('../utilities/seed-database')
+const { boostrapAdminUser, fakeUser, fakeShop } = require('../utilities/db-utilities')
 
 const router = express.Router()
 
