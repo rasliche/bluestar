@@ -63,6 +63,15 @@ userSchema.methods.joinShop = function(newShopId) {
     return this.save()
 }
 
+userSchema.methods.makeManager = function(newShopId) {
+    // Validate Shop Here
+    const shopInUser = _.includes(this.shops, newShopId)
+    const isAlreadyManager = _.includes(this.isManager, newShopId)
+    if (!shopInUser) this.shops.push(newShopId)
+    if (!isAlreadyManager) this.isManager.push(newShopId)
+    return this.save()
+}
+
 const User = mongoose.model('User', userSchema)
 
 function validateUser(user) {
