@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
 
+const User = require('./user')
+
 const shopSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
     name: {
@@ -21,10 +23,6 @@ const shopSchema = new mongoose.Schema({
         { 
             year: Number,
             isComplete: Boolean,
-            // staff: [ {
-            //     type: mongoose.Schema.Types.ObjectId,
-            //     ref: 'User'
-            // } ],
             conservationActivity: {
                 name: String,
                 description: String,
@@ -32,11 +30,17 @@ const shopSchema = new mongoose.Schema({
             }
         }
     ],
+    staff: [ 
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User'
+        } 
+    ],
     managers: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'
-         }
+        }
     ],
     isActive: {
         type: Boolean,
