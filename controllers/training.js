@@ -12,8 +12,7 @@ exports.getDivingCurriculum = (req, res, next) => {
     // Fetch all diving related modules
     res.render('training/curriculum', {
         pageTitle: 'Diving',
-        curriculum: DIVING_CURRICULUM,
-        loggedIn: !!req.session.user
+        curriculum: DIVING_CURRICULUM
     })
 }
 
@@ -21,13 +20,12 @@ exports.getFishingCurriculum = (req, res, next) => {
     // Fetch all fishing related modules
     res.render('training/curriculum', {
         pageTitle: 'Fishing',
-        curriculum: FISHING_CURRICULUM,
-        loggedIn: !!req.session.user
+        curriculum: FISHING_CURRICULUM
     })
 }
 
 exports.getTrainingModule = (req, res, next) => {
     res.render('training/modules/'+req.params.moduleName, {
-        loggedIn: !!req.session.user
+        module: req.params.moduleName
     })
 }
