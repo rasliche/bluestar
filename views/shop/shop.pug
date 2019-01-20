@@ -6,7 +6,6 @@ block content
             p Password: #{shop.password}
             p Contact Email: #{shop.email}
         p= shop.phone
-        p= shop.managers
         p= shop.records
     .border.border-b-2.w-full
         h3 Staff
@@ -14,8 +13,13 @@ block content
             for user in staff
                 li
                     p.w-full= user.name
+                        |  #[a(href="/users/"+user._id).text-xs Details]
+                        if loggedInUser.isAdmin
+                            form(action="/shops/"+shop._id+"/add-manager/"+user._id, method="post")
+                                input(type="hidden", name="_csrf", value=csrfToken)
+                                button(type="submit").text-xs Make Manager
         h3 Managers
         ol
             for manager in shop.managers
                 li
-                    p.w-full= user.name
+                    p.w-full= manager.name
