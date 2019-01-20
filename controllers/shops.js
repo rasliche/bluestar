@@ -23,6 +23,7 @@ exports.getNewShop = (req, res, next) => {
     
 exports.getShop = async (req, res, next) => {
     const shop = await Shop.findById(req.params.shopId)
+        .populate('managers', 'name id')
     const staff = await User.find()
         .where('shops').in(req.params.shopId)
         .select('name id')
