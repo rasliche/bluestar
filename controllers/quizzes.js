@@ -30,14 +30,6 @@ exports.getQuiz = async (req, res, next) => {
     })
 }
 
-exports.getQuizQuiz = async (req, res, next) => {
-    const quiz = await Quiz.findById(req.params.lessonId).select('quiz').populate('quiz')
-
-    res.render('training/quiz/quiz', {
-        pageTitle: quiz.title
-    })
-}
-
 exports.postQuizzes = async (req, res, next) => {
     let quiz = new Quiz({
         title: req.body.title,
@@ -48,7 +40,7 @@ exports.postQuizzes = async (req, res, next) => {
 }
 
 exports.getEditQuiz = async (req, res, next) => {
-    const quiz = await Quiz.findById(req.params.lessonId)
+    const quiz = await Quiz.findById(req.params.quizId)
     console.log(quiz.title)
     res.render('quiz/edit-quiz', {
         pageTitle: `Edit ${quiz.title}`,
