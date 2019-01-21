@@ -32,6 +32,14 @@ exports.getLesson = async (req, res, next) => {
     })
 }
 
+exports.getLessonQuiz = async (req, res, next) => {
+    const quiz = await Lesson.findById(req.params.lessonId).select('quiz').populate('quiz')
+
+    res.render('training/quiz/quiz', {
+        pageTitle: quiz.title
+    })
+}
+
 exports.postLessons = async (req, res, next) => {
     let lesson = new Lesson({
         title: req.body.title,
