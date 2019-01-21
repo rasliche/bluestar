@@ -1,9 +1,8 @@
 extends ../layouts/main-layout.pug
 
 block content
-    ul
-        each course in curriculum
-            li
-                a(href="/training/"+course.slug)= course.title
+    .lesson-cards
+        each lesson in lessons
+            a(href="/training/"+lesson._id)= lesson.title
         else
-            li Come back soon for the list of courses!
+            p Come back soon for the list of courses!
