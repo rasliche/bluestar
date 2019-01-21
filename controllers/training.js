@@ -1,26 +1,23 @@
-const DIVING_CURRICULUM = [
-    {title: 'About Blue Star', slug: 'about-blue-star', id: 1},
-    {title: 'About Florida Keys National Marine Sanctuary', slug: 'about-fknms', id:2},
-    {title: 'Maritime Heritage', slug: 'maritime-heritage', id: 6}
-]
-const FISHING_CURRICULUM = [
-    {title: 'About Blue Star', slug: 'about-blue-star', id: 1},
-    {title: 'About Florida Keys National Marine Sanctuary', slug: 'about-fknms', id:2},
-]
+const { Lesson } = require('../models/lesson')
+const { Quiz } = require('../models/quiz')
 
-exports.getDivingCurriculum = (req, res, next) => {
+exports.getDivingCurriculum = async (req, res, next) => {
     // Fetch all diving related modules
+    const lessons = await Lesson.find().where('programs').in('diving')
+
     res.render('training/curriculum', {
         pageTitle: 'Diving',
-        curriculum: DIVING_CURRICULUM
+        lessons: lessons
     })
 }
 
-exports.getFishingCurriculum = (req, res, next) => {
+exports.getFishingCurriculum = async (req, res, next) => {
     // Fetch all fishing related modules
+    const lessons = await Lesson.find().where('programs').in('fishing')
+
     res.render('training/curriculum', {
         pageTitle: 'Fishing',
-        curriculum: FISHING_CURRICULUM
+        lessons: lessons
     })
 }
 
