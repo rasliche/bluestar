@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
+const _ = require('lodash')
 
 const User = require('./user')
 
@@ -54,6 +55,14 @@ const shopSchema = new mongoose.Schema({
         type: String
     }
 })
+
+shopSchema.methods.addManager = function(userId) {
+    // Validate Shop Here
+    const userInManagers = _.includes(this.managers, userId)
+    if (!userInManagers) this.managers.push(userId)
+    return this.save()
+}
+
 
 function validateShop(shop) {
     const schema = {

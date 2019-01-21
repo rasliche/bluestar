@@ -23,11 +23,11 @@ exports.getNewShop = (req, res, next) => {
     
 exports.getShop = async (req, res, next) => {
     const shop = await Shop.findById(req.params.shopId)
+        .populate('managers', 'name id')
     const staff = await User.find()
         .where('shops').in(req.params.shopId)
         .select('name id')
 
-    
     console.log(shop)
 
     res.render('shop/shop', {
@@ -62,6 +62,16 @@ exports.postUpdateShop = async (req, res, next) => {
     })
 
     res.redirect(`/shops/${shop._id}/edit`)
+}
+
+exports.postAddManager = async (req, res, next) => {
+    const user = await User.findById(req.params.userId)
+    user.makeManager(req.params.shopId)
+
+    const shop = await Shop.findById(req.params.shopId)
+    shop.addManager(req.params.userId)
+
+    res.redirect(`/shops/${shop._id}`)
 }
 
 exports.deleteShop = async (req, res, next) => {

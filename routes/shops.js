@@ -16,6 +16,9 @@ router.get('/new', [auth, admin], shopsController.getNewShop)
 // GET /shops/:shopId/edit
 router.get('/:shopId/edit', [auth, canManage], shopsController.getEditShop)
 
+// POST /shops/:shopId/make-manager/:userId
+router.post('/:shopId/add-manager/:userId', [auth, canManage], shopsController.postAddManager)
+
 // GET /shops/:shopId
 router.get('/:shopId', shopsController.getShop)
 
