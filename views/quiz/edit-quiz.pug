@@ -1,12 +1,12 @@
 extends ../layouts/main-layout
 
 block content
-    form(action="/lessons/"+lesson._id, method="post").border.text-center.w-full
+    form(action="/quiz/"+quiz._id, method="post").border.text-center.w-full
         input(type="hidden", name="_csrf", value=csrfToken)
         div.py-2
             label(for="title").px-2 Lesson Title
             input(
-                value=lesson.title,
+                value=quiz.title,
                 type="text", 
                 id="title", 
                 name="title",
@@ -14,12 +14,16 @@ block content
         div.py-2
             label(for="content").px-2 Lesson Content
             input(
-                value=lesson.content,
+                value=quiz.content,
                 type="text", 
                 id="content", 
                 name="content",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         button(type="submit") Update Shop
-    form(action="/lessons/"+lesson._id+"/delete", method="post")
+    form(action="/quizzes/"+quiz._id+"/delete", method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
-        button(type="submit").p-2.bg-red-lightest.rounded-full.text-sm Delete Lesson
+        button(type="submit").p-2.bg-red-lightest.rounded-full.text-sm Delete Quiz
+
+    .container
+        for question in quiz.questions
+            p= question
