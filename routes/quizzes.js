@@ -8,7 +8,7 @@ const canManage = require('../middleware/can-manage')
 
 // RESTful Routes
 // GET /quizzes
-router.get('/', quizzesController.getQuizs)
+router.get('/', quizzesController.getQuizzes)
 
 // GET /quizzes/new
 router.get('/new', quizzesController.getNewQuiz)
@@ -26,6 +26,6 @@ router.post('/:quizId/delete', quizzesController.deleteQuiz)
 router.post('/:quizId', quizzesController.postUpdateQuiz)
 
 // POST /quizzes
-router.post('/', quizzesController.postQuizs)
+router.post('/', quizzesController.postQuizzes)
 
 module.exports = router
