@@ -3,14 +3,14 @@ const Joi = require('joi')
 
 const quizSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
-    questions: [
+    questions: [ // array of questions with text and an array of answers
         {
             text: String,
-            wrongAnswers: [
-                { type: String }
-            ],
-            correctAnswers: [
-                { type: String }
+            answers: [ // array of answers with text and a T/F flag
+                {
+                    text: { type: String },
+                    correct: { type: Boolean }
+                }
             ]
         }
     ],
