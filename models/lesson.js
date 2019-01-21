@@ -7,7 +7,7 @@ const lessonSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    body: {
+    content: {
         type: String,
         required: true
     },
@@ -37,7 +37,8 @@ const lessonSchema = new mongoose.Schema({
 
 function validateLesson(lessonSchema) {
     const schema = {
-        
+        title: Joi.string().required(),
+        content: Joi.string().required()
     }
 
     return Joi.validate(lessonSchema, schema)
