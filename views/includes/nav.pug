@@ -1,20 +1,20 @@
-nav.flex.flex-wrap.mt-2.mb-2
-    .w-full
-        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/") Home
-        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/about") About
-        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/training") Training
-        a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/community") Community
+nav
+    .flex.flex-wrap.mt-2.mb-2.text-center
+        a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/about") About
+        a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/") Home
+        a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/training") Training
+        a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/community") Community
         unless loggedInUser
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/register") Register
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/login") Login
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/register") Register
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/login") Login
         else
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users/me") Me
-            form(action="/logout", method="post")
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users/me") Me
+            form(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", action="/logout", method="post")
                 input(type="hidden", name="_csrf", value=csrfToken)
-                button(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", type="submit") Logout
-    if loggedInUser.isAdmin
-        .w-full
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/admin") Admin
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/shops") Shops
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users") Users
-            a(class="hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/lessons") Lessons
+                button(type="submit") Logout
+    if !!loggedInUser.isAdmin
+        .flex.flex-wrap.mt-2.mb-2.text-center
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/admin") Admin
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/shops") Shops
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users") Users
+            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/lessons") Lessons
