@@ -1,0 +1,12 @@
+extends ../layouts/main-layout.pug
+
+block content
+    .lesson-cards
+        each lesson in lessons
+            a(href="/lessons/"+lesson._id) #{lesson.title}
+            if loggedInUser.isAdmin
+                    | (#{lesson})
+                    | #[a(href="/lessons/"+lesson._id+"/edit").text-sm Edit]
+        else
+            p Come back soon for the list of courses!
+                
