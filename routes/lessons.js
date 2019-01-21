@@ -16,6 +16,9 @@ router.get('/new', lessonsController.getNewLesson)
 // GET /lessons/:lessonId/edit
 router.get('/:lessonId/edit', lessonsController.getEditLesson)
 
+// GET /lessons/:lessonId/quiz
+router.get('/:lessonId/quiz', lessonsController.getLessonQuiz)
+
 // GET /lessons/:lessonId
 router.get('/:lessonId', lessonsController.getLesson)
 
