@@ -1,12 +1,14 @@
 extends ../layouts/main-layout.pug
 
 block content
-    .lesson-cards
-        each lesson in lessons
-            a(href="/lessons/"+lesson._id) #{lesson.title}
-            if loggedInUser.isAdmin
-                    | (#{lesson})
-                    | #[a(href="/lessons/"+lesson._id+"/edit").text-sm Edit]
+    .quiz-cards.flex.flex-wrap
+        each quiz in quizzes
+            .quiz-card.w-64.bg-blue-lightest.rounded
+                a(href="/quizzes/"+quiz._id) #{quiz.title}
+                if loggedInUser.isAdmin
+                        | (#{quiz})
+                        | #[a(href="/quizzes/"+quiz._id+"/edit").text-sm Edit]
         else
-            p Come back soon for the list of courses!
+            .quiz-card.w-64.bg-blue-lightest.rounded
+                p More coming soon...
                 
