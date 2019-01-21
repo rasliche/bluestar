@@ -9,15 +9,13 @@ exports.getShops = async (req, res, next) => {
     console.log(shops)
     res.render('shop/index', {
         pageTitle: "All Shops",
-        shops: shops,
-        // user: req.session.user
+        shops: shops
     })
 }
 
 exports.getNewShop = (req, res, next) => {
     res.render('shop/new-shop', {
-        pageTitle: "New Shop",
-        // user: req.session.user
+        pageTitle: "New Shop"
     })
 }
     
