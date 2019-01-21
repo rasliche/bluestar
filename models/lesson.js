@@ -32,7 +32,12 @@ const lessonSchema = new mongoose.Schema({
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    } 
+    },
+    programs: [
+        {
+            type: String
+        }
+    ]
 })
 
 function validateLesson(lessonSchema) {
