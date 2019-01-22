@@ -60,14 +60,17 @@ exports.postLessons = async (req, res, next) => {
     let lesson = new Lesson({
         title: req.body.title,
         content: req.body.content,
-        quiz: quiz._id
+        quiz: quiz._id,
+        createdBy: req.user._id
     })
     await lesson.save()
     res.redirect(`/lessons/${lesson._id}`)
 }
 
 exports.getEditLesson = async (req, res, next) => {
-    const lesson = await Lesson.findById(req.params.lessonId).populate('quiz')
+    const lesson = await Lesson.findById(req.params.lessonId).populate('createdBy', 'name')
+    // if (lesson.createdBy === lesson.editedBy) lesson.editedBy = await User.findById(lesson._id).select('name')
+    // lesson.createdBy = await User.findById(lesson._id).select('name')
 
     res.render('lesson/edit-lesson', {
         pageTitle: `Edit ${lesson.title}`,
@@ -80,7 +83,9 @@ exports.postUpdateLesson = async (req, res, next) => {
     const lesson = await Lesson.findByIdAndUpdate(req.params.lessonId, {
         title: title,
         content: content,
-        isActive: !!isActive
+        isActive: !!isActive,
+        editedDate: Date.now(),
+        editedBy: req.user._id
     })
 
     res.redirect(`/lessons/${lesson._id}/edit`)
