@@ -86,16 +86,6 @@ exports.postUpdateLesson = async (req, res, next) => {
     res.redirect(`/lessons/${lesson._id}/edit`)
 }
 
-exports.postAddManager = async (req, res, next) => {
-    const user = await User.findById(req.params.userId)
-    user.makeManager(req.params.lessonId)
-
-    const lesson = await Lesson.findById(req.params.lessonId)
-    lesson.addManager(req.params.userId)
-
-    res.redirect(`/lessons/${lesson._id}`)
-}
-
 exports.deleteLesson = async (req, res, next) => {
     await Lesson.findByIdAndDelete(req.params.lessonId)
 
