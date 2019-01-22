@@ -2,7 +2,10 @@ extends ../layouts/main-layout
 
 block content
     .border.border-b-2.w-full
-        p= lesson.content
-        p= lesson.createdDate
+        p= quiz.title
+    if !!loggedInUser.isAdmin
+        .border.border-b-2.w-full
+            h3 Admin Options
+            p= quiz.createdDate
     .border.border-t-2.w-full
-        a(href="/lessons/"+lesson._id+"/quiz") Take the Quiz
+        a(href="/quizzes/"+quiz._id+"/quiz") Take the Quiz
