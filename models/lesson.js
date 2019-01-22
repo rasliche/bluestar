@@ -5,7 +5,10 @@ const lessonSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
     title: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minlength: 5,
+        maxlength: 255
     },
     content: {
         type: String,
