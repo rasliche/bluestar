@@ -48,6 +48,8 @@ exports.getEditQuiz = async (req, res, next) => {
     })
 }
 
+    res.redirect(`/quizzes/${quizId}/edit`)
+}
 exports.postUpdateQuiz = async (req, res, next) => {
     const quiz = await Quiz.findByIdAndUpdate(req.params.lessonId, {
         name: req.body.name,
