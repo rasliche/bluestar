@@ -36,6 +36,10 @@ const lessonSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },
+    editedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     programs: [
         {
             type: String,
