@@ -1,5 +1,6 @@
 const { Lesson } = require('../models/lesson')
 const { User } = require('../models/user')
+const { Quiz } = require('../models/quiz')
 
 exports.getLessons = async (req, res, next) => {
     // TODO: 
@@ -41,9 +42,16 @@ exports.getLessonQuiz = async (req, res, next) => {
 }
 
 exports.postLessons = async (req, res, next) => {
+    let quiz = new Quiz({
+        title: req.body.title,
+        createdBy: req.user._id,
+        createdDate: Date.now()
+    })
+    await quiz.save()
+
     let lesson = new Lesson({
         title: req.body.title,
-        content: req.body.content
+        quiz: quiz._id
     })
     await lesson.save()
     res.redirect(`/lessons/${lesson._id}`)
