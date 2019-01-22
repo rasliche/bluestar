@@ -1,5 +1,6 @@
 const { Quiz } = require('../models/quiz')
 const { User } = require('../models/user')
+const { addQuestionToQuiz } = require('../services/quiz.services')
 
 exports.getQuizzes = async (req, res, next) => {
     // TODO: 
