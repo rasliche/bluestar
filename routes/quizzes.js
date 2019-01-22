@@ -25,6 +25,9 @@ router.post('/:quizId/delete', quizzesController.deleteQuiz)
 // POST /quizzes/:quizId
 router.post('/:quizId', quizzesController.postUpdateQuiz)
 
+// POST /quizzes/:quizId/add-question
+router.post('/:quizId/add-question', quizzesController.postQuizAddQuestion)
+
 // POST /quizzes
 router.post('/', quizzesController.postQuizzes)
 
