@@ -38,7 +38,8 @@ const lessonSchema = new mongoose.Schema({
     },
     programs: [
         {
-            type: String
+            type: String,
+            enum: ['diving', 'fishing', 'staff', 'volunteer', 'intern']
         }
     ]
 })
