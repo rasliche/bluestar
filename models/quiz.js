@@ -3,34 +3,40 @@ const Joi = require('joi')
 
 const quizSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
+    title: {
+        type: String,
+        required: true
+    },
     questions: [ // array of questions with text and an array of answers
         {
-            text: String,
+            text: {
+                type: String,
+                default: "Enter new question?"
+            },
             answers: [ // array of answers with text and a T/F flag
                 {
-                    text: { type: String },
-                    correct: { type: Boolean }
+                    text: { type: String, default: "This is a wrong answer." },
+                    correct: { type: Boolean, default: false },
                 }
             ]
         }
     ],
-    isActive: {
-        type: Boolean,
-        default: false
-    },
     createdDate: {
         type: Date,
-        required: true,
-        default: Date.now()
+        required: true
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
+        required: true
     },
-    lesson: {
+    editedDate: {
+        type: Date
+    },
+    editedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Lesson'
-    },
+        ref: 'User'
+    }
 })
 
 function validateQuiz(quiz) {
