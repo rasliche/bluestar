@@ -28,8 +28,11 @@ block content
                 name="isActive",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         button(type="submit").p-2.bg-green-lightest.border.border-green-light.rounded-full.text-sm Update Lesson
-    a(href="/quizzes/"+lesson.quiz._id+"/edit")
+    a(href="/quizzes/"+lesson.quiz+"/edit")
         button(type="submit").p-2.border.border-yellow-light.bg-yellow-lightest.rounded-full.text-sm Edit Quiz
     form(action="/lessons/"+lesson._id+"/delete", method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
         button(type="submit").p-2.border.border-red-light.bg-red-lightest.rounded-full.text-sm Delete Lesson
+    .border.border-red-light.w-full
+        //- p.italic Recently edited on #{lesson.editedDate} by #{lesson.editedBy}
+        p.italic Created on #{lesson.createdDate} by #{lesson.createdBy.name}
