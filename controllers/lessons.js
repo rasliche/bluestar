@@ -51,6 +51,7 @@ exports.postLessons = async (req, res, next) => {
 
     let lesson = new Lesson({
         title: req.body.title,
+        content: req.body.content,
         quiz: quiz._id
     })
     await lesson.save()
