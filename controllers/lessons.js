@@ -76,9 +76,11 @@ exports.getEditLesson = async (req, res, next) => {
 }
 
 exports.postUpdateLesson = async (req, res, next) => {
+    const { title, content, isActive } = req.body
     const lesson = await Lesson.findByIdAndUpdate(req.params.lessonId, {
-        name: req.body.name,
-        password: req.body.password || lesson.password
+        title: title,
+        content: content,
+        isActive: !!isActive
     })
 
     res.redirect(`/lessons/${lesson._id}/edit`)
