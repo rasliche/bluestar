@@ -49,6 +49,15 @@ exports.getEditQuiz = async (req, res, next) => {
     })
 }
 
+exports.postQuizAddQuestion = async (req, res, next) => {
+    const { quizId } = req.params
+    const question = {
+        text: req.body.text,
+        answers: req.body.answers
+    }
+
+    await addQuestionToQuiz(quizId, question) // need to await this
+
     res.redirect(`/quizzes/${quizId}/edit`)
 }
 exports.postUpdateQuiz = async (req, res, next) => {
