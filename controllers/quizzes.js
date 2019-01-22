@@ -21,7 +21,7 @@ exports.getNewQuiz = (req, res, next) => {
 }
     
 exports.getQuiz = async (req, res, next) => {
-    const quiz = await Quiz.findById(req.params.lessonId)
+    const quiz = await Quiz.findById(req.params.quizId)
 
     console.log(quiz.title)
 
@@ -32,17 +32,16 @@ exports.getQuiz = async (req, res, next) => {
 }
 
 exports.postQuizzes = async (req, res, next) => {
+    console.log(req.body.title)
     let quiz = new Quiz({
-        title: req.body.title,
-        content: req.body.content
+        title: req.body.title
     })
     await quiz.save()
-    res.redirect(`/quizzes/${quiz._id}`)
+    res.redirect(`/quizzes/${quiz._id}/edit`)
 }
 
 exports.getEditQuiz = async (req, res, next) => {
     const quiz = await Quiz.findById(req.params.quizId)
-    console.log(quiz.title)
     res.render('quiz/edit-quiz', {
         pageTitle: `Edit ${quiz.title}`,
         quiz: quiz
@@ -60,23 +59,13 @@ exports.postQuizAddQuestion = async (req, res, next) => {
 
     res.redirect(`/quizzes/${quizId}/edit`)
 }
+
 exports.postUpdateQuiz = async (req, res, next) => {
-    const quiz = await Quiz.findByIdAndUpdate(req.params.lessonId, {
-        name: req.body.name,
-        password: req.body.password || quiz.password
+    const quiz = await Quiz.findByIdAndUpdate(req.params.quizId, {
+        title: req.body.title
     })
 
     res.redirect(`/quizzes/${quiz._id}/edit`)
-}
-
-exports.postAddManager = async (req, res, next) => {
-    const user = await User.findById(req.params.userId)
-    user.makeManager(req.params.lessonId)
-
-    const quiz = await Quiz.findById(req.params.lessonId)
-    quiz.addManager(req.params.userId)
-
-    res.redirect(`/quizzes/${quiz._id}`)
 }
 
 exports.deleteQuiz = async (req, res, next) => {
