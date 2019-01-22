@@ -1,29 +1,67 @@
 extends ../layouts/main-layout
 
 block content
-    form(action="/quiz/"+quiz._id, method="post").border.text-center.w-full
+    form(action="/quizzes/"+quiz._id, method="post").border.text-center.w-full
         input(type="hidden", name="_csrf", value=csrfToken)
         div.py-2
-            label(for="title").px-2 Lesson Title
+            label(for="title").px-2 Quiz Title
             input(
                 value=quiz.title,
                 type="text", 
                 id="title", 
                 name="title",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
-        div.py-2
-            label(for="content").px-2 Lesson Content
-            input(
-                value=quiz.content,
-                type="text", 
-                id="content", 
-                name="content",
-                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
-        button(type="submit") Update Shop
-    form(action="/quizzes/"+quiz._id+"/delete", method="post")
-        input(type="hidden", name="_csrf", value=csrfToken)
-        button(type="submit").p-2.bg-red-lightest.rounded-full.text-sm Delete Quiz
-
+        button(type="submit").p-2.border.border-green-light.bg-green-lightest.rounded-full.text-sm Update Quiz
     .container
         for question in quiz.questions
-            p= question
+            p= question.text
+            for answer in question.answers
+                p(class=answer.correct ? 'bg-green-lightest' : 'bg-red-lightest') #{answer.text}
+        else
+            p No questions for this quiz yet.
+        form(action="/quizzes/"+quiz._id+"/add-question", method="post").flex.flex-wrap
+            input(type="hidden", name="_csrf", value=csrfToken)
+            div.py-2.w-full
+                label(for="text").px-2 Question Text
+                input(
+                    value="What color is seagrass?",
+                    type="text", 
+                    id="text", 
+                    name="text",
+                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
+                label(for="text").px-2 Correct Answer
+                input(
+                    value="Green",
+                    type="text", 
+                    id="correctAnswer", 
+                    name="answers[]",
+                    class="border-b-2 px-2 bg-green-lightest border-gray-light rounded focus:border focus:border-blue")
+                label(for="text").px-2 Wrong Answer
+                input(
+                    value="Red",
+                    type="text", 
+                    id="wrongAnswer1", 
+                    name="answers[]",
+                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+                label(for="text").px-2 Wrong Answer
+                input(
+                    value="Blue",
+                    type="text", 
+                    id="wrongAnswer2", 
+                    name="answers[]",
+                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+                label(for="text").px-2 Wrong Answer
+                input(
+                    value="Orange",
+                    type="text", 
+                    id="wrongAnswer3", 
+                    name="answers[]",
+                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+            button(type="submit").p-2.border.border-blue-light.bg-blue-lightest.rounded-full.text-sm Add Question
+    form(action="/quizzes/"+quiz._id+"/delete", method="post")
+        input(type="hidden", name="_csrf", value=csrfToken)
+        button(type="submit").p-2.border.border-red-light.bg-red-lightest.rounded-full.text-sm Delete Quiz
+
+
+    p.border.border-red= quiz
