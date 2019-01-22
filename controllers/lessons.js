@@ -59,8 +59,8 @@ exports.postLessons = async (req, res, next) => {
 }
 
 exports.getEditLesson = async (req, res, next) => {
-    const lesson = await Lesson.findById(req.params.lessonId)
-    console.log(lesson.title)
+    const lesson = await Lesson.findById(req.params.lessonId).populate('quiz')
+
     res.render('lesson/edit-lesson', {
         pageTitle: `Edit ${lesson.title}`,
         lesson: lesson
