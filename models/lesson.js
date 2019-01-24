@@ -28,9 +28,7 @@ const lessonSchema = new mongoose.Schema({
         default: Date.now()
     },
     editedDate: {
-        type: Date,
-        required: true,
-        default: Date.now()
+        type: Date
     },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
