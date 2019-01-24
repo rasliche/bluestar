@@ -1,6 +1,11 @@
 extends ../layouts/main-layout
 
 block content
+    div.flex.w-full
+        a(href="/shops/new").px-2 new shop
+        a(href="/lessons/new").px-2 new lesson
+        a(href="/quizzes/new").px-2 new quiz
+
     span(class="sm:w-1/2 w-full").text-center.bg-blue-lightest.rounded-full
         h3.text-sm Total Shops
         p.text-5xl #{shops}
