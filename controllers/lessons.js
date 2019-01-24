@@ -10,15 +10,13 @@ exports.getLessons = async (req, res, next) => {
     console.log(lessons)
     res.render('lesson/index', {
         pageTitle: "All Lessons",
-        lessons: lessons,
-        // user: req.session.user
+        lessons: lessons
     })
 }
 
 exports.getNewLesson = (req, res, next) => {
     res.render('lesson/new-lesson', {
         pageTitle: "New Lesson",
-        // user: req.session.user
     })
 }
     
