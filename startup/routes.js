@@ -7,6 +7,7 @@ const trainingRoutes = require('../routes/training')
 const communityRoutes = require('../routes/community')
 const authRoutes = require('../routes/auth')
 const errorController = require('../controllers/error')
+const devRoutes = require('../routes/dev')
 
 const auth = require('../middleware/auth')
 const admin = require('../middleware/admin')
@@ -25,6 +26,7 @@ module.exports = function(app) {
     app.use('/training', trainingRoutes)
     app.use('/admin', adminRoutes)
     app.use('/community', communityRoutes)
+    app.use('/dev', devRoutes)
     app.use(authRoutes)
 
     // app.use('/500', errorController.get500)
