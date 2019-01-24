@@ -16,7 +16,8 @@ const lessonSchema = new mongoose.Schema({
     },
     quiz: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Quiz'
+        ref: 'Quiz',
+        default: null
     },
     isActive: {
         type: Boolean,
