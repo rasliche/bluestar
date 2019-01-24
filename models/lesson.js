@@ -11,8 +11,7 @@ const lessonSchema = new mongoose.Schema({
         maxlength: 255
     },
     content: {
-        type: String,
-        required: true
+        type: String
     },
     quiz: {
         type: mongoose.Schema.Types.ObjectId,
@@ -42,7 +41,7 @@ const lessonSchema = new mongoose.Schema({
     programs: [
         {
             type: String,
-            enum: ['diving', 'fishing', 'staff', 'volunteer', 'intern']
+            enum: ['diving', 'fishing', 'staff', 'volunteer']
         }
     ]
 })
