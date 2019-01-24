@@ -48,25 +48,17 @@ exports.getLessonQuiz = async (req, res, next) => {
 // }
 
 exports.postLessons = async (req, res, next) => {
-    let quiz = new Quiz({
-        title: req.body.title,
-        createdBy: req.user._id,
-        createdDate: Date.now()
-    })
-    await quiz.save()
-
+    const { title } = req.body
     let lesson = new Lesson({
-        title: req.body.title,
-        content: req.body.content,
-        quiz: quiz._id,
+        title: title,
         createdBy: req.user._id
     })
     await lesson.save()
-    res.redirect(`/lessons/${lesson._id}`)
+    res.redirect(`/lessons/${lesson._id}/edit`)
 }
 
 exports.getEditLesson = async (req, res, next) => {
-    const lesson = await Lesson.findById(req.params.lessonId).populate('createdBy', 'name')
+    const lesson = await Lesson.findById(req.params.lessonId)
     // if (lesson.createdBy === lesson.editedBy) lesson.editedBy = await User.findById(lesson._id).select('name')
     // lesson.createdBy = await User.findById(lesson._id).select('name')
 
@@ -77,13 +69,16 @@ exports.getEditLesson = async (req, res, next) => {
 }
 
 exports.postUpdateLesson = async (req, res, next) => {
-    const { title, content, isActive } = req.body
+    let { title, content, isActive, programs, quiz } = req.body
+    if (!quiz) { quiz = null }
     const lesson = await Lesson.findByIdAndUpdate(req.params.lessonId, {
         title: title,
         content: content,
         isActive: !!isActive,
+        programs: programs,
         editedDate: Date.now(),
-        editedBy: req.user._id
+        editedBy: req.user._id,
+        quiz: quiz
     })
 
     res.redirect(`/lessons/${lesson._id}/edit`)
