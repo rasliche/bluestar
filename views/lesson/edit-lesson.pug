@@ -12,14 +12,6 @@ block content
                 name="title",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         div.py-2
-            label(for="content").px-2 Lesson Content
-            input(
-                value=lesson.content,
-                type="text", 
-                id="content", 
-                name="content",
-                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
-        div.py-2
             label(for="isActive").px-2 Active?
             input(
                 checked=lesson.isActive,
@@ -27,6 +19,33 @@ block content
                 id="isActive", 
                 name="isActive",
                 class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
+        div.py-2
+            fieldset.border-2.border-blue-lighter.py-2
+                legend Programs
+                for program in ['fishing','diving','staff','volunteer']
+                    input(type="checkbox", 
+                        name="programs[]",
+                        id=program,
+                        value=program,
+                        checked=lesson.programs.includes(program)
+                        )
+                    label(for=program).pl-1.pr-4.capitalize= program
+        div.py-2
+            label(for="quiz")
+            select(name="quiz", id="quiz")
+                option(value="") Select a Quiz for this Lesson
+                option(value="new") Create a New Quiz after Update
+                if quizzes
+                    for quiz in quizzes
+                        option(value=quiz._id)= quiz.title
+        div.py-2
+            label(for="content").px-2 Lesson Content
+            textarea(
+                value=lesson.content,
+                type="text", 
+                id="content", 
+                name="content",
+                class="border-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         button(type="submit").p-2.bg-green-lightest.border.border-green-light.rounded-full.text-sm Update Lesson
     a(href="/quizzes/"+lesson.quiz+"/edit")
         button(type="submit").p-2.border.border-yellow-light.bg-yellow-lightest.rounded-full.text-sm Edit Quiz
@@ -34,5 +53,6 @@ block content
         input(type="hidden", name="_csrf", value=csrfToken)
         button(type="submit").p-2.border.border-red-light.bg-red-lightest.rounded-full.text-sm Delete Lesson
     .border.border-red-light.w-full
+        p= lesson
         //- p.italic Recently edited on #{lesson.editedDate} by #{lesson.editedBy}
         //- p.italic Created on #{lesson.createdDate} by #{lesson.createdBy.name}
