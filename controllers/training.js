@@ -1,5 +1,4 @@
 const { Lesson } = require('../models/lesson')
-const { Quiz } = require('../models/quiz')
 
 exports.getDivingCurriculum = async (req, res, next) => {
     // Fetch all diving related modules
