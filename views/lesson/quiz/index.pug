@@ -1,0 +1,14 @@
+extends ../layouts/main-layout.pug
+
+block content
+    .quiz-cards.flex.flex-wrap
+        each quiz in quizzes
+            .quiz-card.w-48.h-64.bg-blue-lightest.rounded.text-center
+                a(href="/quizzes/"+quiz._id) #{quiz.title}
+                if loggedInUser.isAdmin
+                        | (#{quiz})
+                        | #[a(href="/quizzes/"+quiz._id+"/edit").text-sm Edit]
+        else
+            .quiz-card.w-48.h-64.bg-blue-lightest.rounded.text-center
+                p More coming soon...
+                
