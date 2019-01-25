@@ -11,16 +11,16 @@ const canManage = require('../middleware/can-manage')
 router.get('/', lessonsController.getLessons)
 
 // GET /lessons/new
-router.get('/new', lessonsController.getNewLesson)
+router.get('/create', lessonsController.getCreate)
 
 // GET /lessons/:lessonId/edit
-router.get('/:lessonId/edit', lessonsController.getEditLesson)
+router.get('/:lessonId/edit', lessonsController.getLessonEdit)
 
 // GET /lessons/:lessonId/quiz
 router.get('/:lessonId/quiz', lessonsController.getLessonQuiz)
 
-// // GET /lessons/:lessonId/quiz/edit
-// router.get('/:lessonId/quiz/edit', lessonsController.getLessonQuizEdit)
+// GET /lessons/:lessonId/quiz/edit
+router.get('/:lessonId/quiz/edit', lessonsController.getLessonQuizEdit)
 
 // GET /lessons/:lessonId
 router.get('/:lessonId', lessonsController.getLesson)
