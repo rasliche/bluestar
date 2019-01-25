@@ -20,45 +20,47 @@ block content
         else
             p No questions for this quiz yet.
         form(action="/quizzes/"+quiz._id+"/add-question", method="post").flex.flex-wrap
-            input(type="hidden", name="_csrf", value=csrfToken)
-            div.py-2.w-full.flex.flex-wrap
-                label(for="text", class="px-2 w-1/4") Question Text
-                input(
-                    value="What color is seagrass?",
-                    type="text", 
-                    id="text", 
-                    name="text",
-                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
-            div.py-2.w-full.flex.flex-wrap
-                label(for="text", class="px-2 w-1/4") Correct Answer
-                input(
-                    value="Green",
-                    type="text", 
-                    id="correctAnswer", 
-                    name="answers[]",
-                    class="border-b-2 px-2 bg-green-lightest border-gray-light rounded focus:border focus:border-blue w-3/4")
-                label(for="text", class="px-2 w-1/4") Wrong Answer
-                input(
-                    value="Red",
-                    type="text", 
-                    id="wrongAnswer1", 
-                    name="answers[]",
-                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
-                label(for="text", class="px-2 w-1/4") Wrong Answer
-                input(
-                    value="Blue",
-                    type="text", 
-                    id="wrongAnswer2", 
-                    name="answers[]",
-                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
-                label(for="text", class="px-2 w-1/4") Wrong Answer
-                input(
-                    value="Orange",
-                    type="text", 
-                    id="wrongAnswer3", 
-                    name="answers[]",
-                    class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
-            button(type="submit").p-2.border.border-blue-light.bg-blue-lightest.rounded-full.text-sm Add Question
+            fieldset.pl-6.border-2.border-blue-darker
+                legend New Question
+                input(type="hidden", name="_csrf", value=csrfToken)
+                div.py-2.w-full.flex.flex-wrap
+                    label(for="text", class="px-2 w-1/4") Question Text
+                    input(
+                        value="What color is seagrass?",
+                        type="text", 
+                        id="text", 
+                        name="text",
+                        class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
+                div.py-2.w-full.flex.flex-wrap
+                    label(for="text", class="px-2 w-1/4") Correct Answer
+                    input(
+                        value="Green",
+                        type="text", 
+                        id="correctAnswer", 
+                        name="answers[]",
+                        class="border-b-2 px-2 bg-green-lightest border-gray-light rounded focus:border focus:border-blue w-3/4")
+                    label(for="text", class="px-2 w-1/4") Wrong Answer
+                    input(
+                        value="Red",
+                        type="text", 
+                        id="wrongAnswer1", 
+                        name="answers[]",
+                        class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
+                    label(for="text", class="px-2 w-1/4") Wrong Answer
+                    input(
+                        value="Blue",
+                        type="text", 
+                        id="wrongAnswer2", 
+                        name="answers[]",
+                        class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
+                    label(for="text", class="px-2 w-1/4") Wrong Answer
+                    input(
+                        value="Orange",
+                        type="text", 
+                        id="wrongAnswer3", 
+                        name="answers[]",
+                        class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue w-3/4")
+                button(type="submit").p-2.border.border-blue-light.bg-blue-lightest.rounded-full.text-sm Add Question
     form(action="/quizzes/"+quiz._id+"/delete", method="post")
         input(type="hidden", name="_csrf", value=csrfToken)
         button(type="submit").p-2.border.border-red-light.bg-red-lightest.rounded-full.text-sm Delete Quiz
