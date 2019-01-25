@@ -1,6 +1,4 @@
 const { Lesson } = require('../models/lesson')
-const { User } = require('../models/user')
-const { Quiz } = require('../models/quiz')
 
 exports.getLessons = async (req, res, next) => {
     // TODO: 
@@ -14,17 +12,14 @@ exports.getLessons = async (req, res, next) => {
     })
 }
 
-exports.getNewLesson = (req, res, next) => {
-    res.render('lesson/new-lesson', {
+exports.getCreate = (req, res, next) => {
+    res.render('lesson/create', {
         pageTitle: "New Lesson",
     })
 }
-    
+
 exports.getLesson = async (req, res, next) => {
     const lesson = await Lesson.findById(req.params.lessonId)
-
-    console.log(lesson.title)
-
     res.render('lesson/lesson', {
         pageTitle: lesson.title,
         lesson: lesson,
@@ -32,19 +27,21 @@ exports.getLesson = async (req, res, next) => {
 }
 
 exports.getLessonQuiz = async (req, res, next) => {
-    const quiz = await Lesson.findById(req.params.lessonId).select('quiz').populate('quiz')
-
+    const quiz = await Lesson.findById(req.params.lessonId).select('quiz')
     res.render('training/quiz/quiz', {
         pageTitle: quiz.title
     })
 }
 
+exports.getLessonQuizEdit = async (req, res, next) => {
     const lesson = await Lesson.findById(req.params.lessonId).select('quiz').populate('quiz')
 
-//     res.render('quiz/edit-quiz', {
-//         pageTitle: quiz.title
-//     })
-// }
+    res.render('lesson/quiz/edit-quiz', {
+        pageTitle: lesson.title,
+        lesson: lesson,
+        quiz: lesson.quiz
+    })
+}
 
 exports.postLessons = async (req, res, next) => {
     const { title } = req.body
@@ -56,7 +53,7 @@ exports.postLessons = async (req, res, next) => {
     res.redirect(`/lessons/${lesson._id}/edit`)
 }
 
-exports.getEditLesson = async (req, res, next) => {
+exports.getLessonEdit = async (req, res, next) => {
     const lesson = await Lesson.findById(req.params.lessonId)
     // if (lesson.createdBy === lesson.editedBy) lesson.editedBy = await User.findById(lesson._id).select('name')
     // lesson.createdBy = await User.findById(lesson._id).select('name')
@@ -69,7 +66,7 @@ exports.getEditLesson = async (req, res, next) => {
 
 exports.postUpdateLesson = async (req, res, next) => {
     let { title, content, isActive, programs, quiz } = req.body
-    if (!quiz) { quiz = null }
+    if (!quiz) quiz = null
     const lesson = await Lesson.findByIdAndUpdate(req.params.lessonId, {
         title: title,
         content: content,
