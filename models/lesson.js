@@ -14,9 +14,20 @@ const lessonSchema = new mongoose.Schema({
         type: String
     },
     quiz: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Quiz',
-        default: null
+        questions: [ // array of questions with text and an array of answers
+            {
+                text: {
+                    type: String,
+                    default: "Enter new question?"
+                },
+                answers: [ // array of answers with text and a T/F flag
+                    {
+                        text: { type: String, default: "This is a wrong answer." },
+                        correct: { type: Boolean, default: false },
+                    }
+                ]
+            }
+        ]
     },
     isActive: {
         type: Boolean,
