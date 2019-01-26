@@ -10,6 +10,10 @@ const lessonSchema = new mongoose.Schema({
         minlength: 5,
         maxlength: 255
     },
+    cardThumbnail: {
+        type: String,
+        default: "https://www.fillmurray.com/640/360"
+    },
     content: {
         type: String
     },
