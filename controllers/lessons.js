@@ -49,7 +49,7 @@ exports.postLessons = async (req, res, next) => {
         title: title,
         createdBy: req.user._id
     })
-    await lesson.save()
+    lesson = await lesson.save()
     res.redirect(`/lessons/${lesson._id}/edit`)
 }
 
@@ -65,16 +65,17 @@ exports.getLessonEdit = async (req, res, next) => {
 }
 
 exports.postUpdateLesson = async (req, res, next) => {
-    let { title, content, isActive, programs, quiz } = req.body
+    let { title, content, isActive, programs, quiz, cardThumbnail } = req.body
     if (!quiz) quiz = null
     const lesson = await Lesson.findByIdAndUpdate(req.params.lessonId, {
         title: title,
         content: content,
         isActive: !!isActive,
         programs: programs,
+        quiz: quiz,
+        cardThumbnail: cardThumbnail,
         editedDate: Date.now(),
-        editedBy: req.user._id,
-        quiz: quiz
+        editedBy: req.user._id
     })
 
     res.redirect(`/lessons/${lesson._id}/edit`)
