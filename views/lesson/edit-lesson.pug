@@ -31,12 +31,13 @@ block content
                         )
                     label(for=program).pl-1.pr-4.capitalize= program
         div.py-2
-            label(for="quiz")
-            select(name="quiz", id="quiz")
-                option(value="") Select a Quiz for this Lesson
-                if quizzes
-                    for quiz in quizzes
-                        option(value=quiz._id)= quiz.title
+            label(for="cardThumbnail").px-2 Thumbnail
+            input(
+                value=lesson.cardThumbnail,
+                type="text", 
+                id="cardThumbnail", 
+                name="cardThumbnail",
+                class="border-b-2 px-2 border-gray-light rounded focus:border focus:border-blue")
         div.py-2
             label(for="content").px-2 Lesson Content
             textarea(
