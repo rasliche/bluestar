@@ -27,7 +27,7 @@ block content
                         name="programs[]",
                         id=program,
                         value=program,
-                        checked=lesson.programs.includes(program)
+                        checked=(lesson.programs === null ? false : lesson.programs.includes(program))
                         )
                     label(for=program).pl-1.pr-4.capitalize= program
         div.py-2
