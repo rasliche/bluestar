@@ -12,7 +12,7 @@ const lessonSchema = new mongoose.Schema({
     },
     cardThumbnail: {
         type: String,
-        default: "https://www.fillmurray.com/640/360"
+        default: "https://www.fillmurray.com/g/360/640"
     },
     content: {
         type: String
