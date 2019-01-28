@@ -5,4 +5,6 @@ block content
         div!= lesson.content
     .border.border-t-2.w-full.flex.items-center.justify-between
         a(href="/lessons").ml-8 Return to All Lessons
+        if loggedInUser.isAdmin
+            a(href="/lesson/"+lesson._id+"/edit") Edit this Lesson
         a(href="/lessons/"+lesson._id+"/quiz").mr-8 Take the Quiz
