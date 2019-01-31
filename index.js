@@ -7,15 +7,6 @@ app.set('view engine', 'pug')
 app.set('views', './views')
 app.use(express.static('public'))
 
-// console.log('Application Name: ' + config.get('name'))
-
-// app.use((req, res, next) => {
-    //     res.setHeader('Access-Control-Allow-Origin', '*')
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-//     next()
-// })
-
 // startup
 require('./startup/logging')()
 require('./startup/middleware')(app)
