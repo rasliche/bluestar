@@ -5,6 +5,7 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
 const csrf = require('csurf')
 const flash = require('connect-flash')
+const h = require('../utilities/helpers')
 
 const csrfProtection = csrf()
 
@@ -43,6 +44,7 @@ module.exports = function(app) {
     })
     
     app.use((req, res, next) => {
+        res.locals.h = h
         res.locals.csrfToken = req.csrfToken()
         res.locals.loggedInUser = req.user || false
         next()
