@@ -1,18 +1,23 @@
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 const Joi = require('joi')
+const slug = require('slugs')
 
 const lessonSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
     title: {
         type: String,
-        required: true,
+        required: "Please enter a lesson title.",
         trim: true,
         minlength: 5,
         maxlength: 255
     },
-    cardThumbnail: {
+    thumbnail: {
         type: String,
         default: "https://www.fillmurray.com/g/360/640"
+    },
+    slug: {
+        type: String
     },
     content: {
         type: String
@@ -69,6 +74,16 @@ function validateLesson(lessonSchema) {
 
     return Joi.validate(lessonSchema, schema)
 }
+
+lessonSchema.pre('save', function(next) {
+    if (!this.isModified('name')) {
+        next() // skip it
+        return // stop this function from running
+    }
+    this.slug = slug(this.name)
+    next()
+    // TODO: make more resilient so slugs are unique
+})
 
 const Lesson = mongoose.model('Lesson', lessonSchema)
 

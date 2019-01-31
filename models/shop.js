@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 const Joi = require('joi')
+const slug = require('slugs')
 const _ = require('lodash')
 
 const User = require('./user')

@@ -9,6 +9,9 @@ const flash = require('connect-flash')
 const h = require('./utilities/helpers')
 const app = express()
 const routes = require('./routes/index')
+const helmet = require('helmet')
+const compression = require('compression')
+const errorHandlers = require('./handlers/errorHandlers')
 
 // configuration
 app.set('view engine', 'pug')
@@ -18,7 +21,8 @@ app.use(express.static('public'))
 // startup
 const csrfProtection = csrf()
 
-const { User } = require('./models/user')
+app.use(helmet())
+app.use(compression())
 
 const MONGODB_URI = config.get('db')
 
@@ -27,49 +31,30 @@ const store = new MongoDBStore({
     collection: 'sessions'
 })
 
-module.exports = function(app) {
-    app.use(express.urlencoded({ extended: true }))
-    app.use(session({
-        secret: config.get('session_secret'),
-        resave: false,
-        saveUninitialized: false,
-        store: store
-    }))
-    app.use(csrfProtection)
-    app.use(flash())
-    
-    app.use(async (req, res, next) => {
-        try {
-            if (!req.session.user) return next()
-            // Find the current logged in user
-            const user = await User.findById(req.session.user)
-                .populate('shops', 'name')
-                .select('-password')
-            req.user = user
-            next()
-        } catch (err) {
-            throw new Error(err)
-        }
-    })
-    
-    app.use((req, res, next) => {
-        res.locals.h = h
-        res.locals.csrfToken = req.csrfToken()
-        // res.locals.loggedInUser = req.user || false
-        next()
-    })
-    
-    console.log(`app: ${app.get('env')}`)
-    app.use(morgan('dev'))
-    console.log('Morgan enabled...')
 
-    app.use((req, res, next) => {
-        console.log(req.session)
-        next()
-    })
-}
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(session({
+    secret: config.get('session_secret'),
+    resave: false,
+    saveUninitialized: false,
+    store: store
+}))
+app.use(csrfProtection)
+app.use(flash())
+
+app.use((req, res, next) => {
+    res.locals.h = h
+    res.locals.csrfToken = req.csrfToken()
+    next()
+})
+
+console.log(`app: ${app.get('env')}`)
+app.use(morgan('dev'))
 
 app.use('/', routes)
+
+app.use(errorHandlers.notFound)
 
 async () => {
     try {
@@ -81,8 +66,6 @@ async () => {
         console.error(err)
     }
 }
-
-require('./startup/prod')(app)
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Listening on port ${port}.`))
