@@ -5,7 +5,7 @@ const lessonsRoutes = require('../routes/lessons')
 const trainingRoutes = require('../routes/training')
 const communityRoutes = require('../routes/community')
 const authRoutes = require('../routes/auth')
-const errorController = require('../controllers/error')
+const errorController = require('../controllers/errorController')
 const devRoutes = require('../routes/dev')
 
 const auth = require('../middleware/auth')
