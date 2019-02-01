@@ -1,25 +1,21 @@
 const config = require('config')
 const express = require('express')
 const app = express()
+const routes = require('./routes/index')
+const errorController = require('./controllers/errorController')
 
 // configuration
 app.set('view engine', 'pug')
 app.set('views', './views')
 app.use(express.static('public'))
 
-// console.log('Application Name: ' + config.get('name'))
-
-// app.use((req, res, next) => {
-    //     res.setHeader('Access-Control-Allow-Origin', '*')
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-//     next()
-// })
+// Use our routes
+app.use(routes)
+app.use(errorController.catchErrors)
 
 // startup
 require('./startup/logging')()
 require('./startup/middleware')(app)
-require('./startup/routes')(app)
 require('./startup/db')()
 require('./startup/config')()
 require('./startup/prod')(app)
