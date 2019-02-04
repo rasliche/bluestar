@@ -2,7 +2,7 @@ const config = require('config')
 const morgan = require('morgan')
 const express = require('express')
 const app = express()
-const routes = require('./routes/index')
+// const routes = require('./routes/index')
 const errorController = require('./controllers/errorController')
 const helpers = require('./helpers')
 
@@ -18,6 +18,7 @@ if (app.get('env') === 'development') {
 // startup
 require('./startup/middleware')(app)
 require('./startup/db')()
+require('./startup/routes')(app)
 
 app.use((req, res, next) => {
     // res.locals.csrfToken = req.csrfToken()
@@ -27,8 +28,9 @@ app.use((req, res, next) => {
 })
 
 // Use our routes
-app.use(routes)
+// app.use(routes)
 app.use(errorController.catchErrors)
 
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Listening on port ${port}.`))
+app.listen(port, 
+    () => console.log(`Listening on port ${port}.`))
