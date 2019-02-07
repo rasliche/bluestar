@@ -2,13 +2,13 @@
   "name": "bluestar",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "engines": {
     "node": "11.1.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "start:dev": "nodemon index.js --trace-sync-io",
+    "start": "node app.js",
+    "start:dev": "nodemon app.js --trace-sync-io",
     "styles": "./node_modules/.bin/tailwind build public/css/styles.css -c./tailwind.js -o public/css/main.css",
     "test": "jest --watchAll --verbose"
   },
@@ -24,17 +24,25 @@
     "csurf": "^1.9.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "faker": "^4.1.0",
     "helmet": "^3.15.0",
     "joi": "^14.3.0",
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "mongoose": "^5.3.15",
+    "morgan": "^1.9.1",
     "nodemailer": "^4.7.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "morgan": "^1.9.1",
-    "faker": "^4.1.0",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "slugs": "^0.1.3"
   },
   "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.6",
     "tailwindcss": "^0.7.2"
