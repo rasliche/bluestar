@@ -3,6 +3,6 @@ extends ../layout
 include ../mixins/_lessonCard
 
 block content
-    h3 All Lessons
-        each lesson in h.lessons
-            +lessonCard(lesson)
+    h1 All Lessons
+    each lesson in h.lessons
+        +lessonCard(lesson)
