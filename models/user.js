@@ -7,14 +7,19 @@ const Shop = require('./shop')
 const userSchema = new mongoose.Schema({
     // TODO: Shape data better (min lengths, max lengths)
     name: {
-        type: String
+        type: String,
+        required: "A name is required.",
+        min: 1,
+        max: 255
     },
     email: {
         type: String,
         unique: true,
+        lowercase: true,
+        trim: true,
         min: 5,
         max: 255,
-        required: true
+        required: 'An email address is required.'
     },
     password: {
         type: String,
@@ -58,29 +63,31 @@ const userSchema = new mongoose.Schema({
     ]
 })
 
-userSchema.methods.joinShop = function(newShopId) {
-    // Validate Shop Here
-    const shopInUser = _.includes(this.shops, newShopId)
-    if (!shopInUser) { this.shops.push(newShopId) }
-    return this.save()
-}
+// userSchema.methods.joinShop = function(newShopId) {
+//     // Validate Shop Here
+//     const shopInUser = _.includes(this.shops, newShopId)
+//     if (!shopInUser) { this.shops.push(newShopId) }
+//     return this.save()
+// }
 
-userSchema.methods.makeManager = function(newShopId) {
-    // Validate Shop Here
-    const shopInUser = _.includes(this.shops, newShopId)
-    const isAlreadyManager = _.includes(this.isManager, newShopId)
-    if (!shopInUser) this.shops.push(newShopId)
-    if (!isAlreadyManager) this.isManager.push(newShopId)
-    return this.save()
-}
+// userSchema.methods.makeManager = function(newShopId) {
+//     // Validate Shop Here
+//     const shopInUser = _.includes(this.shops, newShopId)
+//     const isAlreadyManager = _.includes(this.isManager, newShopId)
+//     if (!shopInUser) this.shops.push(newShopId)
+//     if (!isAlreadyManager) this.isManager.push(newShopId)
+//     return this.save()
+// }
 
 const User = mongoose.model('User', userSchema)
 
 function validateUser(user) {
     const schema = {
-        email: Joi.string().min(5).max(255).required(),
-        password: Joi.string().required()
+        name: Joi.string().required(),
+        email: Joi.string().min(1).max(255).required(),
+        password: Joi.string().required(),
     }
+    
     return Joi.validate(user, schema)
 }
 
