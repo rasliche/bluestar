@@ -1,5 +1,11 @@
 extends layout.pug
 
 block content
-    p The home of responsible recreation in Florida Keys National Marine Sanctuary.
-    
+    h1.w-full Available Training Paths
+    p.w-full For all available lessons, click #[a(href='/') here]
+    for path in h.trainingPaths
+        .border-blue-dark.border-2.mx-auto.rounded-lg.shadow-lg
+            p.text-xl= path.title
+
+
+
