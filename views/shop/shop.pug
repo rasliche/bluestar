@@ -2,11 +2,13 @@ extends ../layout
 
 block content
     .border.border-b-2.w-full.rounded.m-2
-        if loggedInUser && loggedInUser.isAdmin
-            p Password: #{shop.password}
-            p Contact Email: #{shop.email}
-        p= shop.phone
-        p= shop.records
+        pre= h.dump(shop)
+        pre= h.dump(staff)
+        //- if loggedInUser && loggedInUser.isAdmin
+        //-     p Password: #{shop.password}
+        //-     p Contact Email: #{shop.email}
+        //- p= shop.phone
+        //- p= shop.records
     .border.border-b-2.w-full
         h3 Staff
         ol
@@ -14,12 +16,12 @@ block content
                 li
                     p.w-full= user.name
                         |  #[a(href="/users/"+user._id).text-xs Details]
-                        if loggedInUser.isAdmin
-                            form(action="/shops/"+shop._id+"/add-manager/"+user._id, method="post")
-                                input(type="hidden", name="_csrf", value=csrfToken)
-                                button(type="submit").text-xs Make Manager
-        h3 Managers
-        ol
-            for manager in shop.managers
-                li
-                    p.w-full= manager.name
+                        //- if loggedInUser.isAdmin
+                        //-     form(action="/shops/"+shop._id+"/add-manager/"+user._id, method="post")
+                        //-         input(type="hidden", name="_csrf", value=csrfToken)
+                        //-         button(type="submit").text-xs Make Manager
+        //- h3 Managers
+        //- ol
+        //-     for manager in shop.managers
+        //-         li
+        //-             p.w-full= manager.name
