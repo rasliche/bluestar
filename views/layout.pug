@@ -1,3 +1,5 @@
+include ./mixins/_flashBox
+
 doctype html
 html(lang="en")
     head
@@ -6,27 +8,34 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         link(rel="stylesheet", href="/css/main.css")
         title #{ pageTitle } | Blue Star
-body.bg-blue-dark.container.mx-auto
-    nav
-        .flex.flex-wrap.mt-2.mb-2.text-center
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/about") About
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/") Home
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/training") Training
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/community") Community
-            unless user
-                a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/register") Register
-                a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/login") Login
-            else
-                a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users/me") Me
-                form(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", action="/logout", method="post")
-                    input(type="hidden", name="_csrf", value=csrfToken)
-                    button(type="submit") Logout
-    //- if !!user.isAdmin
-        .flex.flex-wrap.mt-2.mb-2.text-center
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/admin") Admin
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/shops") Shops
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/users") Users
-            a(class="flex-1 hover:bg-blue-lighter p-2 mr-1 bg-blue-lightest rounded", href="/lessons") Lessons
-    .container.mx-auto.px-2.pt-2.pb-4.flex.flex-wrap.bg-white.rounded
-        h1.w-full= pageTitle
+body.bg-chart-shallow.container.mx-auto
+    header.mt-2
+        nav.flex.items-center.justify-between.flex-wrap.bg-blue.px-6.py-2.rounded
+            .flex.items-center.flex-no-shrink.text-white.mr-6
+                a(href="/").text-white.no-underline.font-semibold.text-xl Blue Star
+            //- Conditionally show if user.isAdmin is true
+            if (user && user.isAdmin)
+                .flex.items-center.w-auto
+                    a(class="inline-block mt-0 text-blue-lighter hover:text-white p-2 mr-4 no-underline", href="/admin") Admin
+            .flex.items-center.w-auto
+                .text-sm.flex-grow
+                    for item in h.menu
+                        a(class="inline-block mt-0 text-blue-lighter hover:text-white p-2 mr-4 no-underline", href=item.slug)= item.title
+                    //- conditionally show these if user is logged in or out
+                    unless user
+                        a(class="inline-block mt-0 text-blue-lighter hover:text-white p-2 mr-4 no-underline", href="/login") Login
+                        a(class="inline-block mt-0 text-blue-lighter hover:text-white p-2 mr-4 no-underline", href="/register") Register
+                    else
+                        form(action="/logout", method="post").inline-block.mt-0.p-2.mr-4 
+                            button(type="submit", class="text-blue-lighter hover:text-white no-underline") Logout
+
+
+    .container.mx-auto.px-2.pt-2.pb-4.mt-2.bg-white.rounded
+        block messages
+            - const categories = Object.keys(flashes)
+            each category in categories
+                each message in flashes[category]
+                    +flashBox(category, message)
         block content
+
+        //- iframe(width="100%" height="800px" src="https://noaa.maps.arcgis.com/apps/MapJournal/index.html?appid=5d5868f80cdb4b4c80e54ac47a0bf069" frameborder="0" scrolling="no")
