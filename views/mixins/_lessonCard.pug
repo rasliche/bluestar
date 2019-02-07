@@ -1,0 +1,5 @@
+mixin lessonCard(lesson = {})
+    .border.w-48.h-64.flex.flex-wrap.m-2.rounded
+        a(href="/training/"+lesson.slug).text-xl.w-full.no-underline.text-blue-darkest= lesson.title
+
+//- lesson icon/thumbnail
