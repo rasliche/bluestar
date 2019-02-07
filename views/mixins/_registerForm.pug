@@ -1,0 +1,31 @@
+mixin registerForm()
+    h3.mt-4 Register for the first time
+    form(action="/register", method="post").mt-2
+            input(type="hidden", name="_csrf", value=csrfToken)
+            div.py-2
+                label(for="name") Name 
+                input(
+                    type="text", 
+                    name="name", 
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
+                label(for="email") Email 
+                input(
+                    type="text", 
+                    name="email", 
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
+                label(for="password") Password 
+                input(
+                    type="password", 
+                    name="password", 
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            div.py-2
+                label(for="confirmPassword") Confirm Password 
+                input(
+                    type="password", 
+                    name="confirmPassword", 
+                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
+            button(
+                type="submit",
+                class="border-2 p-1 rounded border-blue") Register
