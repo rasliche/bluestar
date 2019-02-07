@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const authController = require('../controllers/auth')
+const authController = require('../controllers/authController')
 
 // GET /register
 router.get('/register', authController.getRegister)
@@ -17,10 +17,6 @@ router.post('/login', authController.postLogin)
 
 // POST /logout
 router.post('/logout', authController.postLogout)
-
-
-// GET /reset
-router.get('/reset', authController.getReset)
 
 // POST /reset
 router.post('/reset', authController.postReset)

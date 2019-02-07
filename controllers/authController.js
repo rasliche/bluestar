@@ -5,31 +5,44 @@ const _ = require('lodash')
 const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 
-const { User } = require('../models/user')
+const { User, validateUser } = require('../models/user')
 
-const transporter = nodemailer.createTransport(sendgridTransport({
+var transporter = nodemailer.createTransport({
+    host: "smtp.mailtrap.io",
+    port: 2525,
     auth: {
-        api_key: config.get('sendgrid_api_key')
+      user: "1cb833bc67eaca",
+      pass: "eb7d13628f2041"
     }
-}))
+  });
+
+// const transporter = nodemailer.createTransport(sendgridTransport({
+//     auth: {
+//         api_key: config.get('sendgrid_api_key')
+//     }
+// }))
 
 exports.getRegister = (req, res, next) => {
-    let errorMessage = req.flash('error')
-    if (errorMessage.length > 0) {
-        errorMessage = errorMessage[0]
-    } else {
-        errorMessage = null
-    }
     res.render('auth/register', {
-        pageTitle: "Register",
-        errorMessage: errorMessage
+        pageTitle: "Register"
     })
 }
 
 exports.postRegister = async (req, res, next) => {
+    const name = req.body.name
     const email = req.body.email
-    const password = req.body.password
+    let password = req.body.password
     const confirmPassword = req.body.confirmPassword
+
+    if (!(name && email && password && confirmPassword)) {
+        req.flash('error', "All fields are required.")
+        return res.redirect('/register')
+    }
+
+    if (password !== confirmPassword) {
+        req.flash('error', "Passwords do not match.")
+        return res.redirect('/register')
+    }
     
     let user = await User.findOne({ email: email })
     if (user) {
@@ -37,14 +50,11 @@ exports.postRegister = async (req, res, next) => {
         return res.redirect('/register')
     }
 
-    if (password !== confirmPassword) {
-        req.flash('error', "Passwords do not match.")
-    }
-
-    const hashedPass = await bcrypt.hash(password, 12)
+    password = await bcrypt.hash(password, 12)
     user = new User({
-        email: email,
-        password: hashedPass
+        name,
+        email,
+        password,
     })
     await user.save()
 
@@ -53,7 +63,7 @@ exports.postRegister = async (req, res, next) => {
         to: email,
         from: "BlueStar.Developer@gmail.com",
         subject: "signup succeeded",
-        html: "<h1>You signed up successfully.</h1"
+        html: "<h1>You signed up successfully.</h1>"
     })
 
     req.flash('success', 'Successfully registered! Please log in.')
@@ -61,30 +71,14 @@ exports.postRegister = async (req, res, next) => {
 }
 
 exports.getLogin = (req, res, next) => {
-    let errorMessage = req.flash('error')
-    if (errorMessage.length > 0) {
-        errorMessage = errorMessage[0]
-    } else {
-        errorMessage = null
-    }
-
-    let successMessage = req.flash('success')
-    if (successMessage.length > 0) {
-        successMessage = successMessage[0]
-    } else {
-        successMessage = null
-    }
-
     res.render('auth/login', {
         pageTitle: "Login",
-        errorMessage: errorMessage,
-        successMessage: successMessage
-        })
+    })
 }
 
 exports.postLogin = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.email }).select('email password')
+        const user = await User.findOne({ email: req.body.email })
         
         if (!user) {
             req.flash('error', 'Invalid email or password.')
@@ -98,7 +92,7 @@ exports.postLogin = async (req, res, next) => {
         req.session.user = user._id
         await req.session.save()
         req.flash('success', 'Successfully logged in!')
-        res.redirect('users/me')
+        res.redirect('/')
     } catch (err) {
         return next(err)
     }
@@ -111,20 +105,6 @@ exports.postLogout = async (req, res, next) => {
     } catch (err) {
         console.log(err)
     }
-}
-
-exports.getReset = (req, res, next) => {
-    let errorMessage = req.flash('error')
-    if (errorMessage.length > 0) {
-        errorMessage = errorMessage[0]
-    } else {
-        errorMessage = null
-    }
-
-    res.render('auth/reset', {
-        pageTitle: "Reset Password",
-        errorMessage: errorMessage
-        })
 }
 
 exports.postReset = (req, res, next) => {
