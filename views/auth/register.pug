@@ -1,33 +1,7 @@
 extends ../layout
 
+include ../mixins/_registerForm
+
 block content
     div#register-form.text-center
-        if !!errorMessage
-            p.border.border-red= errorMessage
-        form(action="/register", method="post")
-            input(type="hidden", name="_csrf", value=csrfToken)
-            div.py-2
-                label(for="email") Email 
-                input(
-                    type="text", 
-                    name="email", 
-                    id="email",
-                    placeholder="john.doe@gmail.com",
-                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
-            div.py-2
-                label(for="password") Password 
-                input(
-                    type="password", 
-                    name="password", 
-                    id="password",
-                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
-            div.py-2
-                label(for="confirmPassword") Confirm Password 
-                input(
-                    type="password", 
-                    name="confirmPassword", 
-                    id="confirmPassword",
-                    class="border-b-2 border-gray-light rounded focus:border focus:border-blue")
-            button(
-                type="submit",
-                class="border-2 p-1 rounded border-blue") Register
+        +registerForm()
