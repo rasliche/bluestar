@@ -1,35 +1,45 @@
 extends ../layout
 
+include ../mixins/_newShopForm
+include ../mixins/_shopCard
+
 block content
-    div.flex.w-full
-        a(href="/shops/new").px-2 new shop
-        a(href="/lessons/new").px-2 new lesson
+    h1 Admin Index Page
 
-    span(class="sm:w-1/2 w-full").text-center.bg-blue-lightest.rounded-full
-        h3.text-sm Total Shops
-        p.text-5xl #{shops}
-        a(href="/shops") View All
+    +newShopForm()
+    .flex.flex-wrap
+        if shops
+            for shop in shops
+                +shopCard(shop)
+    //- div.flex.w-full
+    //-     a(href="/shops/new").px-2 new shop
+    //-     a(href="/lessons/new").px-2 new lesson
+
+    //- span(class="sm:w-1/2 w-full").text-center.bg-blue-lightest.rounded-full
+    //-     h3.text-sm Total Shops
+    //-     p.text-5xl #{shops}
+    //-     a(href="/shops") View All
     
-    span(class="sm:w-1/2 w-full").text-center.bg-blue-lightest.rounded-full
-        h3.text-sm Total Users
-        p.text-5xl #{totalUsers}
-        a(href="/users") View All
+    //- span(class="sm:w-1/2 w-full").text-center.bg-blue-lightest.rounded-full
+    //-     h3.text-sm Total Users
+    //-     p.text-5xl #{totalUsers}
+    //-     a(href="/users") View All
 
-    div.mt-8.w-full.mx-8.flex.flex-wrap
-        h3.w-full Recent Users
-        //- - var i = 0
-        //- - var end = 4 || users.length-1
-        //- while i < end
-        each user in users
-            .h-12.px-4.w-full.border.flex.justify-between.items-center
-                p.flex-1= user.name
-                p.flex-1= user.email
-                p.flex-1= user.score
-                //- p.flex-1 #{ Date.now()}
-
-    //- div.mt-8
-    //-     h3 Dive Shops
-    //-     each shop in shops
+    //- div.mt-8.w-full.mx-8.flex.flex-wrap
+    //-     h3.w-full Recent Users
+    //-     //- - var i = 0
+    //-     //- - var end = 4 || users.length-1
+    //-     //- while i < end
+    //-     each user in users
     //-         .h-12.px-4.w-full.border.flex.justify-between.items-center
-    //-             p.flex-1= shop.name
-    //-             p.flex-1= shop.password
+    //-             p.flex-1= user.name
+    //-             p.flex-1= user.email
+    //-             p.flex-1= user.score
+    //-             //- p.flex-1 #{ Date.now()}
+
+    //- //- div.mt-8
+    //- //-     h3 Dive Shops
+    //- //-     each shop in shops
+    //- //-         .h-12.px-4.w-full.border.flex.justify-between.items-center
+    //- //-             p.flex-1= shop.name
+    //- //-             p.flex-1= shop.password
