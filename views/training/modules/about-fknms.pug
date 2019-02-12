@@ -1,5 +1,7 @@
 extends ../../layout
 
+include ../../mixins/_quiz
+
 block content
     .flex.flex-wrap.justify-center
         h1.border-blue-lighter.border-b-4.mb-4.px-20.w-full About Florida Keys National Marine Sanctuary
@@ -35,30 +37,37 @@ block content
         //- [insert: slideshow of images: FK_aerial reef.jpg; FK_mangrove.jpg; FK_A.palm_coral.jpg; fish_coral.jpg; shipwreck.jpg; seagrass2.jpg (something like fknmshabs.mov)]
 
         p(class="w-5/6 pt-2") As a Blue Star partner, you are playing an important role in protecting these unique and valuable sanctuary resources.
+    
+    .flex.flex-wrap.justify-center
+        //- Can add "Oops!" or "Nice Job!" depending on if correct
+        +quiz({
+            title: "About Florida Keys National Marine Sanctuary",
+            questions: [
+                {
+                    text: "The Florida Keys National Marine Sanctuary is part of a ______ system of marine protected areas, managed by the ________.",
+                    answers: [
+                        { text: "regional, National Park Service", correct: false },
+                        { text: "national, National Park Service", correct: false },
+                        { text: "regional, National Oceanic and Atmospheric Administration", correct: false },
+                        { text: "national, National Oceanic and Atmospheric Administration", correct: true },
+                    ],
+                    infoMsg: "The Florida Keys National Marine Sanctuary is one of 13 sanctuaries located across the nation and managed by the National Oceanic and Atmospheric Administration, or “NOAA.” NOAA is a federal agency housed under the U.S. Department of Commerce. NOAA programs and services assist citizens across the entire nation."
+                },
+                {
+                    text: "The Florida Keys National Marine Sanctuary was designated in:",
+                    answers: [
+                        { text: "1985", correct: false },
+                        { text: "1990", correct: true },
+                        { text: "2001", correct: false },
+                        { text: "1970", correct: false },
+                        { text: "1995", correct: false },
+                    ],
+                    infoMsg: "Congress designated the Florida Keys National Marine Sanctuary in 1990, amidst concerns over declining water quality, oil exploration, and vessel groundings."
+                },
+            ]
+        })
     //-
         Quiz
-        [Correct answer in bold; when correct answer is chosen, a congrats message should pop up (“You are correct!”). Text that should pop up if an incorrect answer is chosen appears in brackets.]
-
-        1. The Florida Keys National Marine Sanctuary is part of a _____________ system of marine protected areas, managed by the ________________. 
-        statewide, Florida Fish and Wildlife Conservation Commission
-        regional, National Park Service
-        national, National Park Service
-        regional, National Oceanic and Atmospheric Administration
-        national, National Oceanic and Atmospheric Administration
-
-        [Oops! The Florida Keys National Marine Sanctuary is one of 13 sanctuaries located across the nation and managed by the National Oceanic and Atmospheric Administration, or “NOAA.” NOAA is a federal agency housed under the U.S. Department of Commerce. NOAA programs and services assist citizens across the entire nation.]
-
-
-        2. The Florida Keys National Marine Sanctuary was designated in:
-            a. 1985
-            b. 1990
-            c. 2001
-            d. 1970
-            e. 1995
-
-        [Oops! Congress designated the Florida Keys National Marine Sanctuary in 1990, amidst concerns over declining water quality, oil exploration, and vessel groundings.]
-
-
         3. Which of the following habitats are found in the sanctuary?
             a. Coral reefs
             b. Seagrass meadows
