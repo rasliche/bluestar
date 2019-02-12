@@ -1,0 +1,9 @@
+mixin quiz(quiz = { title: "A topic" })
+    div
+        h2 And now to test your knowledge... #{quiz.title}
+        each question in quiz.questions
+            section
+                p= question.text
+                ol
+                    each answer in question.answers
+                        li= answer.text
