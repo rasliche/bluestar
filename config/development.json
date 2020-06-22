@@ -1,7 +1,0 @@
-{
-    "dbConfig": {
-        "MONGO_USER": "rasliche",
-        "MONGO_PASSWORD": "oEr7LFXI2pb9MY2U",
-        "MONGO_DEFAULT_DB": "bluestar_development"
-    }
-}
