@@ -1,9 +1,0 @@
-mixin shopCard(shop = {})
-    .border.w-48.h-64.flex.flex-wrap.m-2.rounded
-        a(href="/shops/"+shop.slug).text-xl.w-full.no-underline.text-blue-darkest= shop.name
-        p.blue-lighter= shop.password
-        a(href=shop.website) website
-
-//- number of staff
-//- link to their website
-//- button to delete (with confirmation)

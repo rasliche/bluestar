@@ -1,8 +1,0 @@
-extends ../layout
-
-include ../mixins/_lessonCard
-
-block content
-    h1 All Lessons
-    each lesson in h.lessons
-        +lessonCard(lesson)

@@ -1,6 +1,0 @@
-{
-    "name": "APP_NAME",
-    "session_secret": "SESSION_SECRET",
-    "sendgrid_api_key": "SENDGRID_API_KEY",
-    "db": "DB"
-}

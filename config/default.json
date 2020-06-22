@@ -1,6 +1,7 @@
 {
-    "name": "FKNMS Blue Star",
-    "session_secret": "development_secret",
-    "sendgrid_api_key": "sendgrid_api_key",
-    "db": ""
+    "dbConfig": {
+        "MONGO_USER": "",
+        "MONGO_PASSWORD": "",
+        "MONGO_DEFAULT_DB": ""
+    }
 }

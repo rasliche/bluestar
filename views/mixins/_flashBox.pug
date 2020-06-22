@@ -1,7 +1,0 @@
-mixin flashBox(type = "info", message = "Test Message")
-    - const palette = { "info": "yellow", "error": "red", "success": "green", }
-    - const color = palette[type]
-    .flex.justify-around
-        div(class=`border-${color}-light border-l-4 bg-${color}-lightest p-4`)
-            p(class=`font-bold uppercase text-${color}`)= type
-            p(class=`text-${color}`)= message

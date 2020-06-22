@@ -1,7 +1,0 @@
-module.exports = (req, res, next) => {
-    if (req.user.isAdmin) {
-        return next()
-    }
-    req.flash('error', 'Not authorized to view the requested page.')
-    res.redirect('/')
-}

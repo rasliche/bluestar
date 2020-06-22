@@ -1,8 +1,0 @@
-extends ../layouts/main-layout.pug
-
-block content
-    .lesson-cards
-        each lesson in lessons
-            a(href="/training/"+lesson._id)= lesson.title
-        else
-            p Come back soon for the list of courses!

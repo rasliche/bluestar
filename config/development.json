@@ -1,5 +1,7 @@
 {
-    "name": "FKNMS Blue Star - Development",
-    "session_secret": "development_secret",
-    "db": "mongodb://localhost:27017/bluestar"
+    "dbConfig": {
+        "MONGO_USER": "rasliche",
+        "MONGO_PASSWORD": "oEr7LFXI2pb9MY2U",
+        "MONGO_DEFAULT_DB": "bluestar_development"
+    }
 }
